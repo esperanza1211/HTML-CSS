@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta charset="UTF-8">
+<title>Document</title>
+<script type="text/javascript">
+(function(){
+	toSize();
+	window.addEventListener('resize',toSize);//屏幕大小改变的时候，重新计算一下 rem的基准值
+	function toSize(){
+		var html = document.documentElement;//获取html
+		var width = html.clientWidth; //获取到html的宽度
+		var nub = 10.8;//把rem的基准值(也就是html的字体大小)，设置成屏幕宽度的多少分之一
+		html.style.fontSize = width / nub + "px";//设置html的字体大小 
+	}
+})();	
+</script>
+<link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">当当</h1>
+        <div class="search-box">
+            <input type="search" placeholder="考试图书，满300减100" class="search" />
+        </div>
+        <div class="header-menu"><a herf="javascript:;">分类</a></div>
+    </header>
+    <div class="banner">
+        <div class="banner-mask">
+        <input type="radio" name="tab" id="fir" class="banner-input" />
+        <label for="fir"></label>
+        <input type="radio" name="tab" id="sec" class="banner-input" />
+        <label for="sec"></label>
+        <input type="radio" name="tab" id="thr" class="banner-input" />
+        <label for="thr"></label>
+        <input type="radio" name="tab" id="for" class="banner-input" />
+        <label for="for"></label>
+        <input type="radio" name="tab" id="fiv" class="banner-input" />
+        <label for="fiv"></label>
+        <input type="radio" name="tab" id="six" class="banner-input" />
+        <label for="six"></label>
+        <input type="radio" name="tab" id="sev" class="banner-input" />
+        <label for="sev"></label>
+        <input type="radio" name="tab" id="eig" class="banner-input" />
+        <label for="eig"></label>
+        </div>
+        <ul class="bannerlist">
+            <li>
+                <img src="img/banner1.jpg" />
+            </li>
+            <li>
+                <img src="img/banner2.jpg" />
+            </li>
+            <li>
+                <img src="img/banner3.jpg" />
+            </li>
+            <li>
+                <img src="img/banner4.jpg" />
+            </li>
+            <li>
+                <img src="img/banner5.jpg" />
+            </li>
+            <li>
+                <img src="img/banner6.jpg" />
+            </li>
+            <li>
+                <img src="img/banner7.jpg" />
+            </li>
+            <li>
+                <img src="img/banner8.jpg" />
+            </li>
+        </ul>
+    </div>
+    <main class="main">
+        <a href="#" class="ad1">
+            <img src="img/ad1.png" />
+        </a>
+        <nav class="subnav">
+            <a href="#">图书</a><span class="subnav-border"></span>
+            <a href="#">电子书</a><span class="subnav-border"></span>
+            <a href="#">网络文学</a><span class="subnav-border"></span>
+            <a href="#">当当优品</a><span class="subnav-border"></span>
+            <a href="#">文玩拍卖</a>
+            <a href="#">童书</a><span class="subnav-border"></span>
+            <a href="#">母婴</a><span class="subnav-border"></span>
+            <a href="#">玩具</a><span class="subnav-border"></span>
+            <a href="#">童装童鞋</a><span class="subnav-border"></span>
+            <a href="#">创意文具</a>
+            <a href="#">女装</a><span class="subnav-border"></span>
+            <a href="#">男装</a><span class="subnav-border"></span>
+            <a href="#">内衣配饰</a><span class="subnav-border"></span>
+            <a href="#">鞋靴箱包</a><span class="subnav-border"></span>
+            <a href="#">运动户外</a>
+            <a href="#">美妆个护</a><span class="subnav-border"></span>
+            <a href="#">食品</a><span class="subnav-border"></span>
+            <a href="#">营养健康</a><span class="subnav-border"></span>
+            <a href="#">珠宝手表</a><span class="subnav-border"></span>
+            <a href="#">当当优选</a>
+            <a href="#">家居家纺</a><span class="subnav-border"></span>
+            <a href="#">家电</a><span class="subnav-border"></span>
+            <a href="#">Apple</a><span class="subnav-border"></span>
+            <a href="#">手机数码</a><span class="subnav-border"></span>
+            <a href="#">图书榜</a>    
+        </nav>
+        <div class="hot-news">
+            <span class="sales">促销</span>
+            <span class="infor">快讯</span>
+            <span class="news-border"></span>              
+            <a href="#" class="hot-news-link">每200减100即将引爆！</a>
+            <a href="#" class="hot-news-more">更多</a>
+        </div>
+        <div class="mod-ad wrap">
+            <a href="#" class="modad-link">
+                <img src="img/ad2.png" />
+            </a>
+        </div>
+        <section class="flash-sale">
+            <div class="flash-sale-top">
+                <h2 class="flash-sale-title">秒杀</h2>
+                <div class="time-box">
+                    <time class="time">00</time>:
+                    <time class="time">00</time>:
+                    <time class="time">00</time>
+                </div>
+                <a href="#" class="flash-sale-more">更多</a>
+            </div>
+            <div class="flash-sale-scroll">
+                <ul class="flash-sale-list">
+                    <li>
+                        <a href="#">
+                            <img src="img/flash-sale1.png" />
+                            <span class="price">￥9.90</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/flash-sale2.png" />
+                            <span class="price">￥59.90</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/flash-sale3.png" />
+                            <span class="price">￥12</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/flash-sale3.png" />
+                            <span class="price">￥12</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <div class="mod-ad wrap">
+            <a href="#" class="modad-link">
+                <img src="img/ad3.png" />
+            </a>
+        </div>
+        <section class="shopping">
+            <div class="mod-header wrap">
+                <h2 class="modheader-title">尾品汇.闪购</h2>
+                <p class="modheader-more">更多</p>
+            </div>
+            <div class="shopping-box wrap">
+                <ul class="shopping-list">
+                    <li class="shopping-list-first">
+                        <a href="#">
+                            <img src="img/shopping-list1.png" />
+                            <h3 class="shopping-title">尾品会</h3>
+                            <p class="shopping-note">2.9折封顶</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/shopping-list2.png" />
+                            <h3 class="shopping-title">米奇丁当童装</h3>
+                            <p class="shopping-note">每满200减100</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/shopping-list3.png" />
+                            <h3 class="shopping-title">三只松鼠</h3>
+                            <p class="shopping-note">萌鼠开学季低至3折起</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/shopping-list4.png" />
+                            <h3 class="shopping-title">品轩阁旗舰店</h3>
+                            <p class="shopping-note">全场包邮9元起</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/shopping-list5.png" />
+                            <h3 class="shopping-title">菜百首饰</h3>
+                            <p class="shopping-note">七夕新饰</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/shopping-list6.png" />
+                            <h3 class="shopping-title">富安娜旗舰店</h3>
+                            <p class="shopping-note">4.9折疯抢</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/shopping-list7.png" />
+                            <h3 class="shopping-title">图书尾品汇</h3>
+                            <p class="shopping-note">2.9折封顶</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/shopping-list8.png" />
+                            <h3 class="shopping-title">童书尾品汇</h3>
+                            <p class="shopping-note">2.9折封顶</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/shopping-list9.png" />
+                            <h3 class="shopping-title">文艺社科尾品汇</h3>
+                            <p class="shopping-note">2.9折封顶</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="book">
+            <div class="mod-header wrap">
+                <h2 class="modheader-title">图书·电子书·网络文学</h2>
+                <p class="modheader-more">更多</p>
+            </div>
+            <div class="mod-ad2 wrap">
+                <a href="#" class="modad-link">
+                    <img src="img/ad4.png" />
+                </a>
+            </div>
+            <div class="mod-list wrap">
+                <div class="modlist-first-row">
+                    <div class="modlist-col1">
+                        <a href="#">
+                            <img src="img/book-list1.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">精选图书</h3>
+                                <p class="modlist-note">满100减30 200减60</p></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modlist-col2">
+                        <a href="#">
+                            <img src="img/book-list2.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">电子书租阅</h3>
+                                <p class="modlist-note">6元/月7万图书</p></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modlist-col3">
+                        <a href="#">
+                            <img src="img/book-list3.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">教辅开学季</h3>
+                                <p class="modlist-note">满100减30</p></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <ul class="modlist-second-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/book-list4.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">万种图书</h3>
+                                <p class="modlist-note">满100减30</p></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/book-list5.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">文学艺术</h3>
+                                <p class="modlist-note">满100减30</p></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="modlist-third-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/book-list6.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">外语好书</h3>
+                                <p class="modlist-note">满100减30</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/book-list7.png" />
+                             <div class="modlist-text">
+                                <h3 class="modlist-title">经济管理</h3>
+                                <p class="modlist-note">5.9折封顶</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/book-list8.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">生活图书</h3>
+                                <p class="modlist-note">满100减30</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/book-list9.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">人文社科</h3>
+                                <p class="modlist-note">低至3.9折</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="clothes">
+            <div class="mod-header wrap">
+                <h2 class="modheader-title">服装鞋包大牌</h2>
+                <p class="modheader-more">更多</p>
+            </div>
+            <div class="mod-ad2 wrap">
+                <a href="#" class="modad-link">
+                    <img src="img/ad5.png" />
+                </a>
+            </div>
+            <div class="mod-list wrap">
+                <div class="modlist-first-row">
+                    <div class="modlist-col1">
+                        <a href="#">
+                            <img src="img/clothes-img1.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">运动户外专场</h3>
+                                <p class="modlist-msg">阿迪耐克名品特惠</p>
+                                <p class="modlist-note">满200减50 满400减150</p></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modlist-col2">
+                        <a href="#">
+                            <img src="img/clothes-img2.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">米奇丁当童装</h3>
+                                <p class="modlist-msg">秋季上新</p>
+                                <p class="modlist-note">满200减100</p></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modlist-col3">
+                        <a href="#">
+                            <img src="img/clothes-img3.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">茵曼开学季</h3>
+                                <p class="modlist-msg">上不封顶</p>
+                                <p class="modlist-note">满200减100</p></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <ul class="modlist-second-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/clothes-img4.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">DOODOO女包</h3>
+                                <p class="modlist-msg">超值钜献</p>
+                                <p class="modlist-note">30元无门槛礼卷</p></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/clothes-img5.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">大牌男女装</h3>
+                                <p class="modlist-msg">秋季趣换新</p>
+                                <p class="modlist-note">满199减70</p></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="modlist-third-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/clothes-img6.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">戈美其女鞋</h3>
+                                <p class="modlist-note">全场59元起</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/clothes-img7.png" />
+                                <div class="modlist-text">
+                                <h3 class="modlist-title">浪莎秋季大促</h3>
+                                <p class="modlist-note">满200减100</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/clothes-img8.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">百丽童鞋</h3>
+                                <p class="modlist-note">领券最高减100</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/clothes-img9.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">开学季提前购</h3>
+                                <p class="modlist-note">跨店2件5折</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="baihuo">
+            <div class="mod-header wrap">
+                <h2 class="modheader-title">爱生活.购品质</h2>
+                <p class="modheader-more">更多</p>
+            </div>
+            <div class="mod-ad2 wrap">
+                <a href="#" class="modad-link">
+                    <img src="img/ad6.png" />
+                </a>
+            </div>
+            <div class="mod-list wrap">
+                <div class="modlist-first-row">
+                    <div class="modlist-col1">
+                        <a href="#">
+                            <img src="img/baihuo-img1.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">自营家居</h3>
+                                <p class="modlist-note">满199减100</p></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modlist-col2">
+                        <a href="#">
+                            <img src="img/baihuo-img2.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">精品百货</h3>
+                                <p class="modlist-msg">好货惠生活</p>
+                                <p class="modlist-note">领券立减50</p></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modlist-col3">
+                        <a href="#">
+                            <img src="img/baihuo-img3.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">自营美妆洗护</h3>
+                                <p class="modlist-msg">囤货进行时</p>
+                                <p class="modlist-note">最高满199减100</p></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <ul class="modlist-second-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/baihuo-img4.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">新“当”家</h3>
+                                <p class="modlist-msg">新选好货</p>
+                                <p class="modlist-note">省钱更省心</p></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/baihuo-img5.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">自营美食汇</h3>
+                                <p class="modlist-msg">周末囤货</p>
+                                <p class="modlist-note">满99减40,158减80</p></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="modlist-third-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/baihuo-img6.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">百货畅销榜</h3>
+                                <p class="modlist-note">热卖TOP商品</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/baihuo-img7.png" />
+                                <div class="modlist-text">
+                                <h3 class="modlist-title">自营滋补养生</h3>
+                                <p class="modlist-note">爆品直降</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/baihuo-img8.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">自营三星电视</h3>
+                                <p class="modlist-note">满4000减400</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/baihuo-img9.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">Apple</h3>
+                                <p class="modlist-note">满5000减300</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="youxuan">
+            <div class="mod-header wrap">
+                <h2 class="modheader-title">当当优选</h2>
+                <p class="modheader-more">更多</p>
+            </div>
+            <div class="mod-ad2 wrap">
+                <a href="#" class="modad-link">
+                    <img src="img/ad7.png" />
+                </a>
+            </div>
+            <div class="mod-list wrap">
+                <div class="modlist-first-row">
+                    <div class="modlist-col1">
+                        <a href="#">
+                            <img src="img/youxuan-img1.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">28L整理箱-2只</h3>
+                                <p class="modlist-msg">可收纳生鲜食品</p>
+                                <p class="modlist-note">39.9元秒</p></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modlist-col2">
+                        <a href="#">
+                            <img src="img/youxuan-img2.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">凌美狩猎者</h3>
+                                <p class="modlist-msg">开学好礼</p>
+                                <p class="modlist-note">149元起</p></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="modlist-col3">
+                        <a href="#">
+                            <img src="img/youxuan-img3.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">MUJI制造商床品</h3>
+                                <p class="modlist-msg">买一赠一</p>
+                                <p class="modlist-note">特惠69元起</p></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <ul class="modlist-second-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/youxuan-img4.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">得力60页线圈本</h3>
+                                <p class="modlist-msg">满38包邮</p>
+                                <p class="modlist-note">5.8元/本</p></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/youxuan-img5.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">阳澄湖大闸蟹</h3>
+                                <p class="modlist-msg">公蟹3两母蟹2两</p>
+                                <p class="modlist-note">4对99元秒杀</p></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="modlist-third-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/youxuan-img6.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">医食同源食品</h3>
+                                <p class="modlist-note">9.9元包邮</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/youxuan-img7.png" />
+                                <div class="modlist-text">
+                                <h3 class="modlist-title">热销美妆钜惠</h3>
+                                <p class="modlist-note">全场9.9元起</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/youxuan-img8.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">贝康馨秋尚新</h3>
+                                <p class="modlist-note">纯棉打底19.9起</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/youxuan-img9.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">秋季天干气躁</h3>
+                                <p class="modlist-note">多喝茶</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <div class="mod-ad wrap">
+            <a href="#" class="modad-link">
+                <img src="img/ad8.png" />
+            </a>
+        </div>
+        <section class="baby">
+            <div class="mod-header wrap">
+                <h2 class="modheader-title">BABY</h2>
+                <p class="modheader-more">更多</p>
+            </div>
+            <div class="mod-list wrap">
+                <ul class="modlist-second-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/baby-img4.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">好奇纸尿裤</h3>
+                                <p class="modlist-note">单片低至0.67元</p></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/baby-img5.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">惠氏专场</h3>
+                                <p class="modlist-note">7折起</p></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="modlist-third-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/baby-img6.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">婴幼玩具</h3>
+                                <p class="modlist-note">满199减100</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/baby-img7.png" />
+                                <div class="modlist-text">
+                                <h3 class="modlist-title">精品辅食</h3>
+                                <p class="modlist-note">9.9元起</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/baby-img8.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">奶瓶奶嘴</h3>
+                                <p class="modlist-note">全场低至5折</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/baby-img9.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">歌歌宝贝</h3>
+                                <p class="modlist-note">满200减100</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="child">
+            <div class="mod-header wrap">
+                <h2 class="modheader-title">CHILD</h2>
+                <p class="modheader-more">更多</p>
+            </div>
+            <div class="mod-list wrap">
+                <ul class="modlist-second-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/child-img4.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">米奇丁当童装</h3>
+                                <p class="modlist-msg">秋季上新</p>
+                                <p class="modlist-note">每满200减100</p></span>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/child-img5.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">迪士尼童鞋</h3>
+                                <p class="modlist-msg">秋季新品特惠</p>
+                                <p class="modlist-note">全场满100减30</p></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="modlist-third-row">
+                    <li>
+                        <a href="#">
+                            <img src="img/child-img6.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">乐高</h3>
+                                <p class="modlist-note">满399减60</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/child-img7.png" />
+                                <div class="modlist-text">
+                                <h3 class="modlist-title">开学狂欢季</h3>
+                                <p class="modlist-note">满199减100</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/child-img8.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">小猪佩奇童装</h3>
+                                <p class="modlist-note">满200减100</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="img/child-img9.png" />
+                            <div class="modlist-text">
+                                <h3 class="modlist-title">大黄蜂旗舰店</h3>
+                                <p class="modlist-note">每满200减100</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <div class="mod-ad wrap">
+            <a href="#" class="modad-link">
+                <img src="img/ad9.png" />
+            </a>
+        </div>
+        <div class="recom">
+            <div class="line"></div>
+            <p class="recom-title">根据您的偏好猜您可能喜欢</p>
+            <div class="line"></div>            
+        </div>
+        <ul class="recom-list">
+            <li>
+                <a href="#">
+                <img src="img/recom-img1.png" />
+                <h3 class="recomlist-title">写给儿童的中国历史（全14册）</h3>
+                <p class="recomlist-price">￥<span>286</span>.80</p>
+                <span class="recomlist-note">当当自营</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <img src="img/recom-img2.png" />
+                <h3 class="recomlist-title">动物小说大王沈石溪·品藏书系：狼王梦</h3>
+                <p class="recomlist-price">￥<span>13</span>.80</p>
+                <span class="recomlist-note">当当自营</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <img src="img/recom-img3.png" />
+                <h3 class="recomlist-title">给孩子读诗(闫妮、董洁、赵子琪等明星给孩子读诗！愿…</h3>
+                <span class="recomlist-price">￥<span>52</span>.30</span>
+                <span class="recomlist-note">当当自营</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                <img src="img/recom-img4.png" />
+                <h3 class="recomlist-title">草房子</h3>
+                <p class="recomlist-price">￥<span>11</span>.70</p>
+                <span class="recomlist-note">当当自营</span>
+                </a>
+            </li>
+        </ul>
+    </main>
+    <nav class="nav">
+        <a href="javascript:;" class="nav-active">首页</a>
+        <a href="javascript:;">分类</a>
+        <a href="javascript:;">购物车</a>
+        <a href="javascript:;">我的当当</a>
+        <a href="javascript:;">下载</a>        
+    </nav>
+    <footer class="footer">
+        <div class="loginbar">
+            <div class="login">
+                <a href="#">登录</a>
+                <a href="#">注册</a>                
+            </div>
+            <a href="javascript:;" class="return-top"><span class="top-ico"></span>TOP</a>
+        </div>
+        <div class="footer-infor">
+            <ul class="footernav">
+                <li><a href="#">提建议</a></li>
+                <li><a href="#" class="active">触屏版</a></li>
+                <li><a href="#">电脑版</a></li>
+                <li><a href="#">帮 助</a></li>
+            </ul>
+            <p>Copyright @2017 北京当当网信息技术有限公司</p>
+            <p>北京市朝阳区北三环东路8号，100028</p>
+        </div>
+    </footer>
+</body>
+</html>
