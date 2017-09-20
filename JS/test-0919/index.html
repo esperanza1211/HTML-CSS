@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+    margin: 0;
+    background-color: #908cb4;
+}
+p {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.clearFix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.div {
+	width: 273px;
+	height: 474px;
+	background-color: #e5e3ec;
+	padding: 38px 12px 60px;
+	border: 1px solid #b8b5d0;
+	border-radius: 12px;
+	margin: 30px auto;
+	position: relative;
+}
+.line {
+	width: 50px;
+	height: 0;
+	border: 2px solid #b3b2ba;
+	border-radius: 2px;
+	position: absolute;
+	left: 50%;
+	top: 18px;
+	margin-left: -25px;
+}
+.wrap {
+    width: 266px;
+    height: 468px;
+    border: 3px solid #a7a6ae;
+}
+#box {
+    width: 266px;
+    height: 418px;
+    background-color: #fff;
+    overflow-y: auto;
+}
+.box1 {
+    width: 266px;
+    height: 50px;
+    background-color: #e3e3e3;
+    position: relative;
+}
+#photo {
+    width: 32px;
+    height: 35px;
+    position: absolute;
+    left: 11px;
+    top: 9px;
+}
+#btn-ico {
+    width: 32px;
+    height: 35px;
+    position: absolute;
+    left: 11px;
+    top: 9px;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+}
+.blue {
+    background: url(img/blue.png) no-repeat;
+}
+.red {
+    background: url(img/red.png) no-repeat;
+}
+#text {
+    width: 162px;
+    height: 35px;
+    font: 12px/35px "微软雅黑";
+    color: #232323;
+    text-indent: 10px;
+    border: none;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 54px;
+    top: 9px;
+}
+#btn {
+    width: 50px;
+    height: 35px;
+    position: absolute;
+    right: 0;
+    top: 9px;
+    font: 14/35 "微软雅黑";
+    color: #d97389;
+    border: 0;
+    outline: none;
+    background-color: #e3e3e3;
+    cursor: pointer;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.rcd {
+    padding: 17px 19px 0;
+}
+.img {
+    width: 32px;
+    height: 35px;
+}
+.txtblue {
+    max-width: 144px;
+    font: 12px/30px "微软雅黑";
+    color: #494949;
+    background: #e1e1e1;
+    padding: 0 10px 0 12px;
+    margin-left: 10px;
+    border-radius: 4px;
+    word-break: break-all;
+    position: relative;
+}
+.txtblue:before {
+    content: "";
+    display: block;
+    border: 6px solid transparent;
+    border-right-color: #e1e1e1;
+    position: absolute;
+    left: -12px;
+    top: 10px;
+}
+.txtred {    
+	max-width: 144px;
+    font: 12px/30px "微软雅黑";
+    color: #fff;
+    background: #b2a9c8;
+    padding: 0 12px 0 10px;    
+    margin-right: 10px;
+    border-radius: 4px;
+    word-break: break-all;
+    position: relative;
+}
+.txtred:before {
+    content: "";
+    display: block;
+    border: 6px solid transparent;
+    border-left-color: #b2a9c8;
+    position: absolute;
+    right: -12px;
+    top: 10px;
+}
+</style>
+</head>
+<body>
+<div class="div">
+	<div class="line"></div>
+	<div class="wrap">
+	    <ul id="box"></ul>
+	    <div class="box1">
+	        <div id="photo" class="blue"></div>
+	        <input type="text" id="text" placeholder="请输入"/>
+	        <input type="button" value="发送" id="btn"/>
+	    </div>  
+	</div>
+</div>
+<script>
+var text = document.getElementById("text");
+var btn = document.getElementById("btn");
+var photo = document.getElementById("photo");
+var box = document.getElementById("box");
+var isImg1 = true;
+photo.onclick = function(){
+	if(isImg1 == true){
+		photo.className = 'red';
+		isImg1 = false;	
+	} else {
+		photo.className = 'blue';
+		isImg1 = true;	
+	}
+};
+btn.onclick = function(){
+    if(text.value == ""){
+        alert('亲,写点什么吧');
+    }else if(photo.className == "blue"){
+        box.innerHTML = '<li class="rcd clearFix">'+'<span class="fl img blue">'+photo.innerHTML+'</span>'+'<p class="txt fl txtblue">'+text.value+'</p>'+'</li>'+box.innerHTML;
+    } else {
+        box.innerHTML = '<li class="rcd clearFix">'+'<span class="fr img red">'+photo.innerHTML+'</span>'+'<p class="txt fr txtred">'+text.value+'</p>'+'</li>'+box.innerHTML;
+    }
+    text.value = "";
+}
+</script>
+</body>
+</html>
