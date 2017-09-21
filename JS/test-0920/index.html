@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.wrap {
+    display: inline-block;
+}
+</style>
+<script>
+window.onload = function(){
+    var prev = document.querySelector('#prev');
+    var next = document.querySelector('#next');
+    var img = document.querySelector('img');
+    var nub = document.querySelector('p');
+    var h2 =document.querySelector('h2');
+    var now = 0;
+    var imgData = [
+        "img/img0.jpg",
+        "img/img1.jpg",
+        "img/img2.jpg",
+        "img/img3.jpg",
+        "img/img4.jpg"
+    ]
+    var textData = [
+        "第一张",
+        "第二张",
+        "第三张",
+        "第四张",
+        "第五张"
+    ]
+    nub.innerHTML = (now+1) + "/" + imgData.length;
+    h2.innerHTML = textData[now];
+    prev.onclick = function(){
+        now --;
+        if (now < 0){
+            now = imgData.length - 1;
+        };
+        img.src = imgData[now];
+        nub.innerHTML = (now+1) + '/' + imgData.length;
+        h2.innerHTML = textData[now];
+    };
+    next.onclick = function(){
+        now ++;
+        if (now > imgData.length - 1){
+            now = 0;
+        };
+        img.src = imgData[now];
+        nub.innerHTML = (now+1) + '/' + imgData.length;
+        h2.innerHTML = textData[now];
+    };
+};
+</script>
+</head>
+<body>
+<input type="button" value="上一张" id="prev">
+<div class="wrap">
+    <p></p>
+    <img src="img/img0.jpg" width="200px;" height="200px;" />
+    <h2></h2>
+</div>
+<input type="button" value="下一张" id="next">
+</body>
+</html>

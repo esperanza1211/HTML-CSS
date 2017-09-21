@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+    margin: 0;
+}
+p {
+    margin: 0;
+}
+.wrap {
+    width: 560px;
+    height: 410px;
+    border: 1px solid #cdcdce;
+    background: #000;
+    margin: 30px auto;
+}
+.box2 {
+    padding-top: 15px;
+    text-align: center;
+    font-size: 0;
+}
+.btn {
+    display: inline-block;
+    width: 132px;
+    height: 36px;
+    font: 16px/36px "微软雅黑";
+    color :#fff;
+    text-align: center;
+    background: #000;
+    border: 1px solid #cdcdce;
+}
+.btn:hover {
+    cursor: pointer;
+}
+.btncl {
+    display: inline-block;
+    width: 132px;
+    height: 36px;
+    font: 16px/36px "微软雅黑";
+    color :#000;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #cdcdce;
+}
+.box2 p {
+    font: 14px/38px "微软雅黑";
+    color: #878886;
+}
+.box {
+    width: 550px;
+    height: 310px;
+    padding: 5px;
+    position: relative;
+}
+img{
+    border: none;
+    vertical-align: top;
+    width: 550px;
+    height: 310px;
+}
+#nub {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+}
+.mask {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 32px;
+    width: 100%;
+    background: rgba(0, 0, 0, .3);
+    text-align: center;
+}
+#text {
+    font: 16px/32px "微软雅黑";
+    color: #fff;
+}
+.btnqh {
+    position: absolute;
+    top: 130px;
+    width: 35px;
+    height: 50px;
+    background: url(img/ico1.png) no-repeat 0 0;
+}
+#prev {
+    left: 0;
+    background: url(img/ico1.png) no-repeat 0 0;    
+}
+#prev:hover {
+    background: url(img/ico1.png) no-repeat 0 0 rgba(0, 0, 0, .3);  
+    cursor: pointer; 
+}
+#next {
+    right: 0;
+    background: url(img/ico2.png) no-repeat 0 0;    
+}
+#next:hover {
+    background: url(img/ico2.png) no-repeat 0 0 rgba(0, 0, 0, .3);  
+    cursor: pointer; 
+}
+</style>
+<script>
+window.onload = function(){
+    var cirbtn = document.querySelector('#cirbtn');
+    var orderbtn = document.querySelector('#orderbtn');
+    var note = document.querySelector('#note');
+    var prev = document.querySelector('#prev');
+	var next = document.querySelector('#next');
+	var img = document.querySelector('img');
+	var text = document.querySelector('#text');
+	var nub = document.querySelector('#nub');
+	var now = 0;
+	var imgData = [
+		"img/img0.jpg",
+		"img/img1.jpg",
+		"img/img2.jpg",
+		"img/img3.jpg",
+		"img/img4.jpg"
+	];
+	var textData = [
+		"文字描述一",
+		"文字描述二",
+		"文字描述三",
+		"文字描述四",
+		"文字描述五"
+	];
+    note.innerHTML = '图片可以从最后一张跳转到第一张循环切换';    
+	nub.innerHTML = (now+1) + "/" + imgData.length;
+    text.innerHTML = textData[now];
+    var x = 1;
+    cirbtn.onclick = function(){
+        x=1;
+        cirbtn.className = 'btncl';
+        orderbtn.className = 'btn';
+        note.innerHTML = '图片可以从最后一张跳转到第一张循环切换';
+    }
+    orderbtn.onclick = function (){
+        x=2;
+        cirbtn.className = 'btn';
+        orderbtn.className = 'btncl';
+        note.innerHTML = '图片只能到最后一张或只能到第一张切换';        
+    }
+    prev.onclick = function(){
+        if(x == 1) {
+        now--;
+        if(now < 0){
+            now = imgData.length - 1;
+        }
+        img.src = imgData[now];
+        nub.innerHTML = (now+1) + "/" + imgData.length;
+        text.innerHTML = textData[now];
+        }else {
+            now--;
+            if(now < 0){
+                alert('已经到第一张了');
+                now++;
+            }else {
+                img.src = imgData[now];
+                nub.innerHTML = (now+1) + "/" + imgData.length;
+                text.innerHTML = textData[now];
+            }
+        };
+    };
+    next.onclick = function(){
+        console.log(x)
+        if(x==1) {
+            now++;
+            if(now > imgData.length - 1){
+                now = 0;
+            }
+            img.src = imgData[now];
+            nub.innerHTML = (now+1) + "/" + imgData.length;
+            text.innerHTML = textData[now];
+        }else{
+            now++;
+            if(now > imgData.length - 1){
+                alert('已经到最后一张了');
+                now--;
+            } else{
+                img.src = imgData[now];
+                nub.innerHTML = (now+1) + "/" + imgData.length;
+                text.innerHTML = textData[now];
+            };
+        }
+    };
+};
+</script>
+</head>
+<body>
+<div class="wrap">
+    <div class="box2">
+        <input type="button" value="循环切换" id="cirbtn" class="btncl">
+        <input type="button" value="顺序切换" id="orderbtn" class="btn">
+        <p id="note"></p>
+    </div>
+    <div class="box">
+        <img src="img/img0.jpg"/>
+        <span id="prev" class="btnqh"></span>
+        <span id="next" class="btnqh"></span>
+        <p id="nub">1/1</p>
+        <div class="mask">
+            <p id="text"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
