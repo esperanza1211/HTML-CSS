@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+h2,
+h3,
+p {
+    margin: 0;
+}
+body {
+    background: #ccc;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    width: 460px;
+    height: 175px;
+    background: #fff;
+    border-radius: 5px;
+    padding-top: 25px;
+    margin: 30px auto;
+}
+h2 {
+    position :relative;
+    font:  22px/22px "微软雅黑";
+    color: #000;
+    text-indent: 247px;
+}
+strong {
+    font: bold 18px/22px "微软雅黑";
+}
+h2:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 107px;;
+    top: -5px;
+    width: 125px;
+    height: 31px;
+    background: url(img/logo.png) no-repeat;
+}
+.box {
+    margin-top: 35px;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+}
+ul {
+    float: left;
+    margin-left: 99px;
+}
+li {
+    float: left;
+    width: 30px;
+    height: 30px;
+    background: url(img/icos.png) no-repeat 0 0;
+    margin: 0 4px;
+}
+.show {
+    background-position: 0 -31px;
+}
+.show2 {
+    background-position: 0 -62px;
+}
+h3 {
+    display: none;
+    float: left;
+    width: 60px;
+    height: 30px;
+    font: 14px/30px "微软雅黑"; 
+    color: #fff;
+    background: #e14963;
+    border-radius: 5px;
+    text-align: center;
+    margin-left: 30px;
+}
+.hover {
+    display: block;
+}
+.footer {
+    width: 100%;
+    height: 58px;
+    font: 18px/58px "微软雅黑"; 
+    background: #de4a63;
+    color: #fff;
+    margin-top: 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <h2>|<strong>总体评分</strong></h2>
+    <div class="box">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <h3>推荐</h3>
+    </div>
+    <p class="footer">小提示：点击星星就能打分</p>
+</div>
+<script>
+var lis = document.querySelectorAll('li');
+var h3 = document.querySelector('h3');
+var textData = [
+    '极差',
+    '一般',
+    '不错',
+    '推荐',
+    '力推'
+];
+var now = -1;
+var lll = false;
+var hhh = false;
+for(var i = 0; i < lis.length; i++){
+    lis[i].index = i;
+    lis[i].onclick = function(){
+        if(lll&now==this.index){
+            for(var i =0; i < lis.length; i++){
+            lis[i].className = '';
+            now = -1;
+            lll = false;
+            }
+        } else {
+            for(var j = 0; j < lis.length; j++){
+                if(j<this.index+1){              
+                    if(this.index<2){
+                            lis[j].className = 'show';
+                        } else {
+                            lis[j].className = 'show2';
+                    }
+                } else {
+                    lis[j].className = '';
+                }
+            }
+            now = this.index;
+            lll = true;
+        }
+        h3.className = 'hover';
+        h3.innerHTML = textData[this.index];
+    }
+    lis[i].onmouseover = function(){
+        for(var j = 0; j < lis.length; j++){
+            if(j<this.index+1){              
+                if(this.index<2){
+                        lis[j].className = 'show';
+                    } else {
+                        lis[j].className = 'show2';
+                }
+            } else {
+                lis[j].className = '';
+            }
+        }
+        h3.className = 'hover';
+        h3.innerHTML = textData[this.index];
+        hhh = true;
+    }
+    lis[i].onmouseout = function(){
+        if(lll){
+            for(var i = 0; i < now+1; i++ ){
+                if(now < 2){
+                        lis[i].className = 'show';
+                    } else {
+                        lis[i].className = 'show2';
+                }
+            }
+            for(var i = now+1; i < lis.length; i++ ){
+                lis[i].className = '';
+            }
+        } else {
+            for(var i = 0; i < lis.length; i++){
+                lis[i].className = '';
+            }
+            h3.className = '';            
+            h3.innerHTML = '';
+        }  
+    }
+}
+</script>
+</body>
+</html>

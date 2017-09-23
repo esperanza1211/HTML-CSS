@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.wrap {
+    width: 300px;
+    height: 514px;
+    background: url(img/img.jpg) no-repeat;
+    padding: 30px 20px ;
+}
+div {
+    margin-top: 30px;
+}
+h3 {
+    margin: 0;
+    width: 260px;
+    height: 40px;
+    font: bold 20px/40px "微软雅黑";
+    color: #fff;
+    text-align: center;
+    background: #000;
+    opacity: .5;
+    position: relative;
+}
+.ico {
+    position: absolute;
+    left: 9px;
+    top: 16px;
+    border: 6px solid transparent;
+    border-left-color: #fff;
+}
+.icoact {
+    position: absolute;
+    left: 9px;
+    top: 18px;
+    border: 6px solid transparent;
+    border-top-color: #fff;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: none;
+}
+li {
+    width: 260px;
+    height: 30px;
+    font: 16px/30px "微软雅黑";
+    color: #fff;
+    background: #000;
+    text-align: center;
+}
+.active {
+    background: pink;
+}
+.show {
+    display: block;
+}
+.hover {
+    background: #ccc;
+}
+.show2 {
+    background: red;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div>
+        <h3>我的好友<span class="ico"></span></h3>
+        <ul>
+            <li>哈哈哈</li>
+            <li>哈哈哈</li>
+            <li>哈哈哈</li>
+        </ul>
+    </div>
+    <div>
+        <h3>企业好友<span class="ico"></span></h3>
+        <ul>
+            <li>哈哈哈</li>
+            <li>哈哈哈</li>
+        </ul>
+    </div>
+    <div>
+        <h3>黑名单<span class="ico"></span></h3>
+        <ul>
+            <li>哈哈哈</li>
+            <li>哈哈哈</li>
+        </ul>
+    </div>
+</div>
+<script>
+var h3 = document.querySelectorAll('h3');
+var oul = document.querySelectorAll('ul');
+var oli = document.querySelectorAll('li');
+var icos = document.querySelectorAll('span');
+var now = 0;
+for (var i = 0; i < h3.length; i++){
+    h3[i].index = i;
+    h3[i].onclick = function(){
+        for (var i = 0; i < h3.length; i++){
+            if(i != this.index){
+                h3[i].className = '';
+                icos[this.index].className = 'ico';
+                oul[i].className = '';
+            }
+        }
+        if (this.className == ''){
+            h3[this.index].className = 'active';
+            icos[this.index].className = 'icoact';         
+            oul[this.index].className = 'show';
+        } else {
+            h3[this.index].className = '';
+            icos[this.index].className = 'ico';            
+            oul[this.index].className = '';
+        }
+    }
+}
+for (var i = 0; i < oli.length; i++){
+    oli[i].index = i;
+    oli[i].onmouseover = function(){ 
+        i = this.index;
+        if(oli[i].className != 'hover'){
+            oli[this.index].className = 'show2';
+        }
+    }
+    oli[i].onmouseout = function(){
+        i = this.index;        
+        if(oli[i].className != 'hover'){
+            oli[this.index].className = '';
+        }
+    }
+    oli[i].onclick = function(){
+        for (var i = 0; i < oli.length; i++){
+            oli[now].className = "";
+            this.className = "hover";	
+            oli[now].act = false; 
+            now = this.index;
+        }
+    }
+}
+</script>
+</body>
+</html>
