@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    width: 300px;
+    height: 400px;
+    margin: 50px auto;
+}
+.box {
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+img {
+    width: 300px;
+    height: 300px;
+    border: none;
+    vertical-align: top;
+}
+.btn {
+    position: absolute;
+    top: 120px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: yellow;
+}
+#prev {
+    left: 0px;
+}
+#next {
+    right: 0;
+}
+#nub {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    font: 16px/30px Arial;
+    transform: translateX(-50%);s
+}
+.list {
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    margin-top: 30px;
+}
+.list li {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ccc;
+    position :relative;
+}
+.list div {
+    display: none;
+    position :absolute;
+    left: 50%;
+    bottom: 50px;
+    width: 80px;
+    height: 80px;;
+    margin-left :-40px;
+    background: #fff;
+    text-align: center;
+    border-radius: 5px;
+}
+.list div:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    margin-left: -5px;
+    border: 5px solid transparent;
+    border-top-color: #ccc;
+}
+.img2 {
+    width: 80px;
+    height: 80px;
+    vertical-align: top;
+    border: none;
+    border-radius: 5px;    
+}
+.list .show {
+    display: block;
+}
+.list .active {
+    background: red;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="box">
+        <img src="img/img1.jpg" id="photo">
+        <span id="prev" class="btn"></span>
+        <span id="next" class="btn"></span>  
+        <p id="nub">1/5</p>      
+    </div>
+    <ul class="list">
+        <li class="active">
+            <div>
+                <img src="img/img1.jpg" class="img2">
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="img/img2.jpg" class="img2">            
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="img/img3.jpg" class="img2">            
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="img/img4.jpg" class="img2">          
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="img/img5.jpg" class="img2">         
+            </div>
+        </li>
+    </ul>
+</div>
+<script>
+var prev = document.querySelector('#prev');
+var next = document.querySelector('#next');
+var img = document.querySelector('#photo');
+var lis = document.querySelectorAll('li');
+var boxs = document.querySelectorAll('.list div');
+var nub = document.querySelector('#nub');
+var now = 0;
+var imgData = [
+    'img/img1.jpg',
+    'img/img2.jpg',
+    'img/img3.jpg',
+    'img/img4.jpg',
+    'img/img5.jpg'
+];
+for(var i = 0; i < lis.length; i++){
+    lis[i].index = i;
+    lis[i].onmouseover = function(){
+        boxs[this.index].className = 'show';
+    }
+    lis[i].onmouseout = function(){
+        boxs[this.index].className = '';
+    }
+    lis[i].onclick = function(){
+        now = this.index;            
+        hhh();
+    }
+    prev.onclick = function(){
+        now--;
+        if(now < 0){
+            now = lis.length - 1;
+        }
+        hhh();
+    }
+    next.onclick = function(){
+        now++;
+        if(now > lis.length - 1){
+            now = 0;
+        }
+        hhh();       
+    }
+    function hhh(){
+        for(var i = 0; i < lis.length; i++){
+            lis[i].className = '';
+        }
+        lis[now].className = 'active';      
+        img.src = imgData[now];
+        nub.innerHTML = (now+1)+'/'+lis.length; 
+    }
+}
+</script>
+</body>
+</html>
