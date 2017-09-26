@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<input type="text" id="nub1">
+<select id="operator">
+	<option value="1">+</option>
+	<option value="2">-</option>
+	<option value="3">*</option>
+	<option value="4">/</option>
+</select>
+<input type="text" id="nub2">
+<input type="button" value="=" id="equal">
+<input type="text" id="nub3">
+<script>
+var nub1 = document.querySelector('#nub1');
+var nub2 = document.querySelector('#nub2');
+var nub3 = document.querySelector('#nub3');
+var operator = document.querySelector('#operator');
+var equal = document.querySelector('#equal');
+equal.onclick = function(){
+    var a = Number(nub1.value);
+    var b = Number(nub2.value);
+    var h = operator.value;
+    if(isNaN(a)||isNaN(b)){
+        alert('请输入数字');
+    } else if(h == 1){
+        nub3.value = a + b;
+    } else if(h == 2){
+        nub3.value = a - b;
+    } else if(h == 3){
+        nub3.value = a * b;
+    } else if(h == 4){
+        nub3.value = a / b;
+    }
+}
+</script>
+</body>
+</html>
