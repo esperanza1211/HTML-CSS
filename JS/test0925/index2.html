@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+li {
+    position: relative;
+    width: 500px;
+    height: 30px;
+    border: 1px solid #000;
+}
+input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 30px;
+    text-indent: 30px;
+}
+.show {
+    background: red;
+}
+div {
+    position: relative;
+    width: 500px;
+    height: 30px; 
+    border: 1px solid #000;
+    margin-top: 20px;
+}
+div label {
+    background: pink;
+}
+</style>
+</head>
+<body>
+<ul>
+    <li>
+        <input type="checkbox" id="int1">
+        <label for="int1">泡沫</label>
+    </li>
+    <li>
+        <input type="checkbox" id="int2">
+        <label for="int2">说爱你</label>
+    </li>
+    <li>
+        <input type="checkbox" id="int3">
+        <label for="int3">稻香</label>
+    </li>
+    <li>
+        <input type="checkbox" id="int4">
+        <label for="int4">我的梦</label>
+    </li>
+    <li>
+        <input type="checkbox" id="int5">
+        <label for="int5">怎么说我不爱你</label>
+    </li>
+    <li>
+        <input type="checkbox" id="int6">
+        <label for="int6">无处安放</label>
+    </li>
+</ul>
+<div class="box">
+    <input type="checkbox" id="choose">
+    <label for="choose">全选</label>
+</div>
+<script>
+var btn = document.querySelectorAll('ul label');
+var input = document.querySelectorAll('ul input');
+var cho = document.querySelector('.box input');
+var btnl = document.querySelector('.box label');
+var color = ['#eee','#ccc'];
+// for(var i = 0; i < btn.length; i+=2){
+//     btn[i].style.background = '#eee';
+// }
+// for(var i = 1; i < btn.length; i+=2){
+//     btn[i].style.background = '#ccc';
+// }
+for(var i = 0; i < input.length; i++){
+    input[i].index = i;
+    btn[i].style.background = color[i%2];    
+    input[i].onchange = function(){
+        if(this.checked){
+            btn[this.index].checks=true;
+            btn[this.index].style.background = 'blue';
+        } else {
+            btn[this.index].checks = false;
+            btn[this.index].style.background = color[this.index%2];                
+        }
+        var checksLength = 0;
+        for(var i = 0;i < input.length; i++){
+            if(input[i].checked){
+                checksLength++;
+            }
+        }
+        if(checksLength == input.length){
+            cho.checked = true;
+            btnl.style.background = 'yellow'; 
+        } else {
+            cho.checked = false;
+            btnl.style.background = '';
+        }
+       
+    };
+    btn[i].index=i;
+    btn[i].checks = false;
+    btn[i].onmouseover = function(){
+        if(!this.checks){
+            this.style.background = 'red';
+        }
+    }
+    btn[i].onmouseout = function(){
+        if(this.checks){
+            this.style.background = 'blue';
+        } else {
+            btn[this.index].style.background = color[this.index%2];            
+        }
+    }
+}
+cho.onchange = function(){
+    if(this.checked){
+        for(var i = 0; i < input.length; i++){
+            input[i].checked = true;
+            btn[i].style.background = 'blue';
+        }
+        btnl.style.background = 'yellow';
+    } else {
+        for(var i = 0; i < input.length; i++){
+            input[i].checked = false;
+            btn[i].style.background = color[i%2];            
+        }
+        btnl.style.background = '';
+    }
+}
+</script>
+</body>
+</html>
