@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+p {
+    margin: 0;
+}
+.wrap {
+    width: 450px;
+    height: 555px;
+    background: #1d1d1d;
+    border-radius: 30px;
+    font-size: 0;
+}
+.list {
+    width: 380px;
+    height: 280px;
+    background: #2a2a2a url(bg.png) no-repeat;
+    border-radius: 30px 30px 0 0;
+    padding: 129px 30px 0 40px;
+}
+.list li {
+    margin-bottom: 25px;
+}
+input {
+    width: 40px;
+    height: 35px;
+    background: #282a29;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #fff;
+    margin: 0 10px;
+}
+.nub {
+    display: inline-block;
+    width: 40px;
+    height: 35px;
+    background: #fff;
+    color: #000;
+    font: 14px/35px Arial;
+    text-align: center;
+    border-radius: 5px;
+    vertical-align: top;
+}
+.text {
+    display: inline-block;
+    width: 200px;
+    height: 35px;
+    font: 14px/35px "微软雅黑";
+    background: #171717;
+    vertical-align: top;
+    border-radius: 5px;
+    color: #6c6c6c;
+    text-indent: 15px;
+}
+.text2 {
+    margin-top: 32px;
+    font: 14px/35px "宋体";
+    color: #5e5e5e;
+    text-indent: 40px;
+}
+#num,
+#sum,
+#exp {
+    display: inline-block;
+    width: 45px;
+    height: 35px;
+    background: #fff;
+    border-radius: 5px;
+    font: 16px/35px Arial;
+    text-align: center;
+    text-indent: 0;
+    color: #000;
+    margin: 0 10px;    
+}
+#sum,
+#exp {
+    width: 65px;
+}
+.text3 {
+    color: #5e5e5e;
+    font: 14px/35px "宋体";
+    text-indent: 40px;    
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="list">
+        <li>
+            <input type="button" value="-" class="cut">
+            <span class="nub">0</span>
+            <input type="button" value="+" class="add">
+            <p class="text">
+                单价：<span class="price">12.5</span>元
+                小计：<span class="total">0</span>元
+            </p>
+        </li>
+        <li>
+            <input type="button" value="-" class="cut">
+            <span class="nub">0</span>
+            <input type="button" value="+" class="add">
+            <p class="text">
+                单价：<span class="price">10.5</span>元
+                小计：<span class="total">0</span>元
+            </p>
+        </li>
+        <li>
+            <input type="button" value="-" class="cut">
+            <span class="nub">0</span>
+            <input type="button" value="+" class="add">
+            <p class="text">
+                单价：<span class="price">8.5</span>元
+                小计：<span class="total">0</span>元
+            </p>
+        </li>
+        <li>
+            <input type="button" value="-" class="cut">
+            <span class="nub">0</span>
+            <input type="button" value="+" class="add">
+            <p class="text">
+                单价：<span class="price">8</span>元
+                小计：<span class="total">0</span>元
+            </p>
+        </li>
+        <li>
+            <input type="button" value="-" class="cut">
+            <span class="nub">0</span>
+            <input type="button" value="+" class="add">
+            <p class="text">
+                单价：<span class="price">14.5</span>元
+                小计：<span class="total">0</span>元
+            </p>
+        </li>
+    </ul>
+    <p class="text2">
+        商品共合计：<span id="num">0</span>件
+        共花费了：<span id="sum">0</span>元
+    </p>
+    <p class="text3">
+        其中最贵的商品单价是：<span id="exp">0</span>元
+    </p>
+</div>
+<script>
+function $(selector){
+	return document.querySelector(selector);
+}
+function $s(selector){
+	return document.querySelectorAll(selector);
+}
+var now = [0, 0, 0, 0, 0];
+for(var i = 0; i < $s("li").length; i++){
+    $s(".cut")[i].index = i;
+    $s(".cut")[i].onclick = function(){
+        now[this.index]--;
+        if(now[this.index] < 0){
+            now[this.index] = 0;
+        }
+        hh(this.index);
+    }
+    $s(".add")[i].index = i;
+    $s(".add")[i].onclick = function(){
+        now[this.index]++;
+        hh(this.index);
+    }
+    function hh(index){
+        $s(".nub")[index].innerHTML = now[index];
+        $s(".total")[index].innerHTML = now[index]*$s(".price")[index].innerHTML;
+        var sumNum = 0;
+        var totSum = 0;
+        var hhhexp = 0;
+        for(var j = 0; j < $s("li").length; j++){
+            sumNum += parseInt($s(".nub")[j].innerHTML);
+            totSum += parseFloat($s(".total")[j].innerHTML);
+            if(now[j] != 0 && hhhexp < parseFloat($s(".price")[j].innerHTML)){
+                hhhexp = parseFloat($s(".price")[j].innerHTML);
+            }
+        }
+        $("#num").innerHTML = sumNum;
+        $("#sum").innerHTML = totSum;
+        $("#exp").innerHTML = hhhexp;
+    }
+}
+</script>
+</body>
+</html>
