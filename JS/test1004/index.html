@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    width: 640px;
+    height: 960px;
+    border: 1px solid #000;
+}
+li {
+    position: absolute;
+    width: 64px;
+    height: 96px;
+}
+</style>
+</head>
+<body>
+<ul class="list"></ul>
+<script>
+var list = document.querySelector('.list');
+var inner = "";
+for(var i = 0; i < 100; i++){
+    var k = i%10;
+    var j = parseInt(i/10);
+    inner +=  '<li style="left:'+ k*64 +'px; top:'+ j*96 +'px; background: url(img1.jpeg) no-repeat '+(-k*64)+'px '+(-j*96)+'px;"></li>';
+}
+list.innerHTML = inner;
+</script>
+</body>
+</html>

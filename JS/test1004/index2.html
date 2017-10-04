@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.wrap {
+    position: relative;
+    width: 640px;
+    height: 960px;
+    margin: 30px auto;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    width: 640px;
+    height: 960px;
+    border: 1px solid #000;
+    /* padding: 100px; */
+	perspective: 1000px;
+    perspective-origin: right bottom;
+    /* perspective-origin: left top; */
+    
+}
+li {
+    position: absolute;
+    width: 64px;
+    height: 96px;
+    background: #ccc;
+    transform-style: preserve-3d;
+    transform-origin: center center -32px;
+    /* transition: 1s linear; */
+}
+li span {
+    position: absolute;
+    top: 0;
+    width: 64px;
+    height: 96px;
+}
+li span:nth-of-type(1){
+    left: 0;
+    background: red;
+}
+li span:nth-of-type(2){
+    left: 64px;
+    background: blue;
+    transform-origin: left;
+	transform: rotateY(90deg);
+}
+li span:nth-of-type(3){
+    left: 0;
+    background: green;
+	transform: translateZ(-64px) rotateY(180deg);
+}
+li span:nth-of-type(4){
+    left: -64px;
+    background: yellow;
+	transform-origin: right;
+	transform: rotateY(-90deg);
+}
+#prev {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: pink;
+    border-radius: 50%;
+}
+#next {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: pink;
+    border-radius: 50%;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="list"></ul>
+    <span id="prev"></span>
+    <span id="next"></span>
+</div>
+<script>
+var list = document.querySelector('.list');
+var inner = "";
+var aImgUrl=['img1.jpeg','img2.jpeg','img3.jpeg','img4.jpeg'];
+for(var i = 0; i < 100; i++){
+    var k = i%10;
+    var j = parseInt(i/10);
+    var hhh = '';
+    for(var m = 0; m < 4; m++){ 
+            hhh += '<span style="background: url('+aImgUrl[m]+') no-repeat '+(-k*64)+'px '+(-j*96)+'px"></span>';
+        }
+    inner +=  '<li style="left:'+ k*64 +'px; top:'+ j*96 +'px;">'+hhh+'</li>';
+}
+list.innerHTML = inner;
+
+var prev = document.querySelector('#prev');
+var next = document.querySelector('#next');
+var lis = document.querySelectorAll('.list li');
+var deg=0;
+next.onclick = function(){
+    deg+=90;
+    for(var i = 0; i < 100; i++){
+        lis[i].style.cssText += "transform:rotateY("+deg+"deg);";
+        var k = i%10;
+        var j = parseInt(i/10);
+        var h = 0.2;
+        lis[(j*10+k)].style.cssText += "transition: "+k*h+"s linear;";
+    }
+}
+prev.onclick = function(){
+    deg-=90;
+    for(var i = 0; i < 100; i++){
+        lis[i].style.cssText += "transform:rotateY("+deg+"deg);";
+        var k = i%10;
+        var j = parseInt(i/10);
+        var h = 0.2;
+        lis[(j*10+k)].style.cssText += "transition: "+(9-k)*h+"s linear;";
+    }
+}
+</script>
+</body>
+</html>
