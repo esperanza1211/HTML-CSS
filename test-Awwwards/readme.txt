@@ -1,3 +1,3 @@
-ԭ��ַhttps://www.awwwards.com/
+响应式页面练习
 
-��Ӧʽ������ϰ
+原网址：https://www.awwwards.com/
