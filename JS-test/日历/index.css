@@ -1,0 +1,253 @@
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+p {
+    margin: 0;
+}
+.section {
+    width: 600px;
+    height: 360px;
+}
+.nowDate {
+    width: 500px;
+    font: 16px/30px "微软雅黑";
+    color: blue;
+    text-align: center;
+}
+.nowDate:hover {
+    cursor: pointer;
+}
+.wrap {
+    width: 550px;
+    height: 350px;
+}
+.calendar {
+    float: left;
+}
+.timeSw {
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 220px;
+    height: 30px;
+}
+input {
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 30px;
+}
+.prev {
+    left: 0;
+}
+.next {
+    right: 0;
+}
+.date {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform:translateX(-50%);
+    font: 16px/30px "微软雅黑";
+}
+.date:hover {
+    cursor: pointer;
+    color: blue;
+}
+.DatelistWrap {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    overflow: hidden;
+}
+.tenyearList {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 440px;
+    height: 220px;
+    transform: matrix(1,0,0,1,0,0);
+    display: none;
+}
+.nowtenyearList {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.nexttenyearList {
+    position: absolute;
+    left: 221px;
+    top: 0;
+}
+.nowtenyearList li,
+.nexttenyearList li {
+    position: absolute;
+    border: 1px solid #000;
+    width: 53px;
+    height: 70px;
+    text-align: center;
+    font: 16px/70px "微软雅黑";
+}
+.yearList {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 440px;
+    height: 220px;
+    transform: matrix(1,0,0,1,0,0);
+    display: none;
+}
+.nowyearList {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.nextyearList {
+    position: absolute;
+    left: 221px;
+    top: 0;
+}
+.nowyearList li,
+.nextyearList li {
+    position: absolute;
+    border: 1px solid #000;
+    width: 53px;
+    height: 70px;
+    text-align: center;
+    font: 16px/70px "微软雅黑";
+}
+.Datelist {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 440px;
+    height: 220px;
+    overflow: hidden;
+    transform: matrix(1,0,0,1,0,0);
+}
+.nowDatelist {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.nextDatelist {
+    position: absolute;
+    left: 221px;
+    top: 0;
+}
+.nowDatelist .list,
+.nowDatelist .list2,
+.nextDatelist .list,
+.nextDatelist .list2 {
+    position: relative;
+    left: 0;
+    top: 0;
+}
+.nowDatelist .list,
+.nextDatelist .list {
+    height: 30px;
+    width: 230px;
+    margin-bottom: 1px;
+}
+.nowDatelist .list li,
+.nowDatelist .list2 li,
+.nextDatelist .list li,
+.nextDatelist .list2 li {
+    position: absolute;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    text-align: center;
+    font: 16px/30px Arial;
+}
+.active {
+    color: red;
+}
+.show {
+    color: #fff;
+    background: #000;
+}
+.clockMod {
+    float: left;
+    width: 280px;
+    margin-left: 10px;
+}
+.clock {
+    width: 250px;
+    height: 250px;
+    background: #f2f2f2;
+    border-radius: 50%;
+    border: 1px solid #8e9099;
+    position: relative;
+}
+.clock>div {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 240px;
+    height: 240px;
+    border: 1px solid #8e9099;
+    border-radius: 50%;
+}
+.pointList li {
+    position: absolute;
+    left: 118px;
+    top: 5px;
+    width: 4px;
+    height: 4px;
+    background: #000;
+    transform-origin: 2px 115px;
+    border-radius: 50%;
+}
+.pointList li:nth-of-type(5n+1) {
+    height: 8px;    
+}
+.circular {
+    position: absolute;
+    left: 110px;
+    top: 110px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ccc;
+}
+.hoursNeedle {
+    position: absolute;
+    left: 116px;
+    top: 50px;
+    width: 8px;
+    height: 70px;
+    background: red;
+    transform-origin: 4px bottom;
+}
+.minutesNeedle {
+    position: absolute;
+    left: 117px;
+    top: 40px;
+    width: 6px;
+    height: 80px;
+    background: green;
+    transform-origin: 3px bottom;
+}
+.secondsNeedle {
+    position: absolute;
+    left: 118px;
+    top: 30px;
+    width: 4px;
+    height: 120px;
+    background: blue;
+    transform-origin: 2px 90px;    
+}
+.time {
+    font: 16px/30px Arial;
+    text-indent: 90px;
+    margin-top: 10px;
+}
+.week {
+    font: 16px/30px "微软雅黑";
+    text-indent: 100px;
+}

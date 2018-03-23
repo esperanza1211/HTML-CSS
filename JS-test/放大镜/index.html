@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+    margin: 0;
+}
+img {
+    border: none;
+    vertical-align: top;
+}
+
+.wrap {
+    position: relative;
+    width: 1000px;
+    height: 600px;
+    /* border: 1px solid #000; */
+    margin: 30px auto;
+}
+.box {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 504px;
+    height: 504px;
+}
+.box img {
+    width: 504px;
+    height: 504px;
+}
+.mmm {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    opacity: .8;
+}
+.magnifier {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 300px;
+    background: url(img.jpg) no-repeat;
+    background-size: 1512px 1512px;
+    background-position: 0 0;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="box">
+        <img src="img.jpg" />
+        <div class="mmm"></div>
+    </div>
+    <div class="magnifier"></div>
+</div>
+<script>
+(function(){
+    var box = document.querySelector('.box');
+    var mmm = document.querySelector('.mmm');
+    var magnifier = document.querySelector('.magnifier');
+    var H = css(box,"height");
+    var W = css(box,"width");
+    console.log(H,W);
+    box.addEventListener('mousemove',function(e){
+        var mouse = {
+            x : e.clientX,
+            y : e.clientY
+        }
+        if(mouse.x > W || mouse.y > H){
+            return;
+        }
+        mmm.style.display = "block";
+        magnifier.style.display = 'block';
+        mmm.style.left = (mouse.x - 50) + 'px';
+        mmm.style.top = (mouse.y - 50) + 'px';
+        magnifier.style.backgroundPosition = -(mouse.x*3-150) + "px " + (-(mouse.y*3-150)) + "px";
+        e.stopPropagation();
+    });
+    document.addEventListener('mousemove',function(e){
+        mmm.style.display = "none";
+        magnifier.style.display = 'none';
+    });
+    function css(el,attr,val){
+        if(arguments.length > 2){
+            if(attr == "opacity"){
+                el.style[attr] = val;
+                el.style.filter = "alpha(opacity = "+val*100+")";
+            } else if(attr == "zIndex"){
+                el.style[attr] = parseInt(val);
+            } else {
+                el.style[attr] = val + "px";
+            }
+        } else {
+            return el.currentStyle?parseFloat(el.currentStyle[attr]):parseFloat(getComputedStyle(el)[attr]);
+        }
+    }
+})();
+</script>
+</body>
+</html>

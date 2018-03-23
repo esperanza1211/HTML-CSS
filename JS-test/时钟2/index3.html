@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    margin: 0 10px;
+}
+img {
+    vertical-align: top;
+    border: none;
+    height: 100px;
+}
+.wrap {
+    width: 800px;
+    height: 100px;
+    overflow: hidden;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="time">
+        <li><img src="img/0.JPG" class="now"/></li>
+        <li><img src="img/0.JPG" class="next"/></li>
+    </ul>
+    <ul class="time">
+        <li><img src="img/0.JPG" class="now"/></li>
+        <li><img src="img/0.JPG" class="next"/></li>
+    </ul>
+    <ul>
+        <li><img src="img/colon.JPG" class="colon"/></li>
+    </ul>
+    <ul class="time">
+        <li><img src="img/0.JPG" class="now"/></li>
+        <li><img src="img/0.JPG" class="next"/></li>
+    </ul>
+    <ul class="time">
+        <li><img src="img/0.JPG" class="now"/></li>
+        <li><img src="img/0.JPG" class="next"/></li>
+    </ul>
+    <ul>
+        <li><img src="img/colon.JPG" class="colon"/></li>
+    </ul>
+    <ul class="time">
+        <li><img src="img/0.JPG" class="now"/></li>
+        <li><img src="img/0.JPG" class="next"/></li>
+    </ul>
+    <ul class="time">
+        <li><img src="img/0.JPG" class="now"/></li>
+        <li><img src="img/0.JPG" class="next"/></li>
+    </ul>
+</div>
+<script src="tween.js"></script>
+<script>
+(function(){
+    var times = document.querySelectorAll('.time');
+    var hhh = document.querySelector('.hhh');
+    var imgNow = document.querySelectorAll('.now');
+    var imgNext = document.querySelectorAll('.next');
+    var arr = [
+        "img/0.JPG",
+        "img/1.JPG",
+        "img/2.JPG",
+        "img/3.JPG",
+        "img/4.JPG",
+        "img/5.JPG",
+        "img/6.JPG",
+        "img/7.JPG",
+        "img/8.JPG",
+        "img/9.JPG"
+    ];
+    var str;
+    toTime();
+    setInterval(toMove,1000);
+    function toTime(){
+        str = strTime();
+        for(var i=0; i<str.length; i++){
+            imgNow[i].index = imgNext[i].index = i;
+            imgNow[i].src = arr[str.charAt(i)];
+            imgNext[i].src = arr[(parseInt(str.charAt(i))+1)%10];
+        }
+    }
+    function strTime() {
+        var time = new Date();
+        var hours = time.getHours();
+        var minutes = time.getMinutes();
+        var seconds = time.getSeconds();
+        return toTwo(hours) + toTwo(minutes) + toTwo(seconds);
+    }
+    function toTwo(n) {
+        return n < 10 ? '0' + n : '' + n;
+    }
+    function toMove() {
+        newStr = strTime();
+        for(var i=0; i < str.length; i++){
+            if(str.charAt(i) != newStr.charAt(i)){
+                imgNow[i].src = arr[str.charAt(i)];
+                imgNext[i].src = arr[newStr.charAt(i)];
+                css(times[i],"marginTop",0);
+                startMove(times[i],{marginTop:-100},500,"easeOut"); 
+            }
+        }
+        str=newStr;
+    }
+    var colons = document.querySelectorAll('.colon');
+    var b = 0;
+    setInterval(flick,500);
+    function flick() {
+        !b ? flicks('img/img.JPG',1) : flicks('img/colon.JPG',0);
+    }
+    function flicks(hhh, c){
+        for(var i = 0; i < colons.length; i++){
+            colons[i].src = hhh;
+            b = c;
+        }
+    }
+})()
+</script>
+</body>
+</html>

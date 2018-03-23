@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<table border="1" align="center" width="500">
+	<thead>
+		<th>商品名称</th>
+		<th>单价</th>
+		<th>人气</th>
+		<th>销量</th>
+	</thead>
+	<tbody>
+		<tr>
+			<th>iphone 6</th>
+			<th>3000</th>
+			<th>800</th>
+			<th>200000</th>
+		</tr>
+		<tr>
+			<th>iphone 7</th>
+			<th>5600</th>
+			<th>1000</th>
+			<th>20000</th>
+		</tr>
+		<tr>
+			<th>iphone 8</th>
+			<th>6600</th>
+			<th>100</th>
+			<th>200</th>
+		</tr>
+		<tr>
+			<th>iphone X</th>
+			<th>8888</th>
+			<th>100000</th>
+			<th>0</th>
+		</tr>
+	</tbody>
+</table>
+<div style="text-align: center; margin-top: 30px">
+	<input type="button" value="价格从高到低排序">
+	<input type="button" value="价格从低到高排序">
+	<input type="button" value="人气从高到低排序">
+	<input type="button" value="人气从低到高排序">
+	<input type="button" value="销量从高到低排序">
+	<input type="button" value="销量从低到高排序">
+</div>
+<script type="text/javascript">
+var data = [
+	{
+		name: "iphone X",
+		price: 8888,
+		hot: 100000,
+		sale: 0
+	},{
+		name: "iphone 8",
+		price: 6600,
+		hot: 100,
+		sale: 200
+	},{
+		name: "iphone 7",
+		price: 5600,
+		hot: 1000,
+		sale: 20000
+	},{
+		name: "iphone 6",
+		price: 3000,
+		hot: 800,
+		sale: 200000
+	}
+];	
+var otbody = document.querySelector('tbody');
+var inner = '';
+function fn() {
+	inner = '';
+	for(var i =0; i < 4; i++){
+		inner += '<tr><th>'+data[i].name+'</th><th>'+data[i].price+'</th><th>'+data[i].hot+'</th><th>'+data[i].sale+'</th></tr>'
+	}
+	otbody.innerHTML = inner;
+}	
+var btn = document.querySelectorAll('input');
+btn[0].onclick = function(){
+	data.sort(function(a,b){
+		return b.price - a.price;
+	});
+	fn();
+}
+btn[1].onclick = function(){
+	data.sort(function(a,b){
+		return a.price - b.price;
+	});
+	fn();
+}
+btn[2].onclick = function(){
+	data.sort(function(a,b){
+		return b.hot - a.hot;
+	});
+	fn();
+}
+btn[3].onclick = function(){
+	data.sort(function(a,b){
+		return a.hot - b.hot;
+	});
+	fn();
+}
+btn[4].onclick = function(){
+	data.sort(function(a,b){
+		return b.sale - a.sale;
+	});
+	fn();
+}
+btn[5].onclick = function(){
+	data.sort(function(a,b){
+		return a.sale - b.sale;
+	});
+	fn();
+}
+</script>
+</body>
+</html>

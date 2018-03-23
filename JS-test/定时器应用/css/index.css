@@ -1,0 +1,22 @@
+#nav {
+    width: 500px;
+    height: 36px;
+    position: relative;
+    background: url(../img/nav_bg.gif) repeat-x;
+}
+.adorn1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 36px;
+    background: url(../img/nav_bg.gif) no-repeat 0 -36px;
+}
+.adorn2 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 6px;
+    height: 36px;
+    background: url(../img/nav_bg.gif) no-repeat 0 -72px;
+}

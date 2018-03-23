@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+p {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+input {
+    padding: 0;
+    border: 0;
+}
+body {
+    background: #000;
+    font-size: 0;
+    color: #77d8fa;
+}
+.wrap {
+    width: 698px;
+    height: 496px;
+    background: #5ad3f3;
+    margin: 30px auto;
+    position: relative;
+}
+.inputList {
+    position: absolute;
+    left: 114px;
+    top: 116px;
+    width: 424px;
+    height: 92px;
+    background: #fff;
+    border-radius: 10px;
+    padding-left: 38px;
+    padding-top: 28px;
+}
+.inputList li {
+    float: left;
+    margin-right: 40px;
+    margin-bottom: 10px;
+}
+.inputList li>span {
+    display: inline-block;
+    margin-right: 15px;
+    font: 14px/30px "微软雅黑";
+    color: #000; 
+}
+.inp1 {
+    width: 132px;
+    height: 28px;
+    border-radius: 15px;
+    border: 1px solid #87daf8;
+    padding-left: 10px;
+    font: 14px/28px "微软雅黑"; 
+}
+.inp2 {
+    width: 90px;
+    height: 28px;
+    border-radius: 15px;
+    border: 1px solid #87daf8;
+    padding-left: 10px;
+    font: 14px/28px "微软雅黑";   
+}
+.sex {
+    position: relative;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 140px;
+    height: 28px;
+    border: 1px solid #87daf8;
+    border-radius: 15px;
+}
+.sextext {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 140px;
+    font: 14px/28px "微软雅黑"; 
+    text-indent: 10px;
+}
+.tri {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: 8px solid transparent;
+    border-top-color: blue;
+}
+.sexList {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 35px;
+    width: 130px;
+    height: 30px;
+    background: rgba(0, 0, 0, .4);
+    border-radius: 15px;
+    padding-left: 10px;
+}
+.sexList li {
+    float: left;
+    margin: 0 10px;
+    font: 14px/30px "微软雅黑";
+    color: #fff;
+}
+.btn {
+    width: 142px;
+    height: 30px;
+    border-radius: 15px;
+    color: #fff;
+    background: #33cdf1;
+}
+.newBox {
+    position: absolute;
+    left: 114px;
+    top: 263px;
+    width: 462px;
+}
+.newBox p {
+    position: relative;
+    width: 100%;
+    height: 32px;
+    font: 14px/32px "微软雅黑";
+    color: #fff;
+    background: rgba(0, 0, 255, .2);
+    border-radius: 5px;
+}
+.newBox p input,
+.newBox p .opt {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    border: 1px solid #77d8fa;
+}
+.newBox p strong {
+    position: absolute;
+    left: 48px;
+    top: 0;
+    font-weight: normal;
+}
+.newBox p span:nth-of-type(1) {
+    position: absolute;
+    top: 0;
+    left: 89px;
+}
+.newBox p span:nth-of-type(2) {
+    position: absolute;
+    top: 0;
+    left: 148px;
+}
+.newBox p span:nth-of-type(3) {
+    position: absolute;
+    top: 0;
+    left: 222px;
+}
+.newBox p span:nth-of-type(4) {
+    position: absolute;
+    top: 0;
+    left: 282px;
+}
+.newBox p span:nth-of-type(5) {
+    position: absolute;
+    top: 0;
+    left: 372px;
+}
+.newList {
+    width: 100%;
+    height: 100%;
+}
+.newList li {
+    margin-top: 2px;
+    height: 32px;
+}
+.newList li p {
+    background: #fff;
+    color: #77d8fa;
+}
+.newList li p .del {
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    background: red;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="inputList">
+        <li>
+            <span>姓名</span>
+            <input type="text" class="inp1">
+        </li>
+        <li>
+            <span>年龄</span>
+            <input type="text" class="inp2">
+        </li>
+        <li>
+            <span>性别</span>
+            <box class="sex">
+                <p class="sextext"></p>
+                <span class="tri"></span>
+                <ul class="sexList">
+                    <li>男</li>
+                    <li>女</li>
+                    <li>保密</li>
+                </ul>
+            </box>
+        </li>
+        <li>
+            <input type="button" value="添加" class="btn">
+        </li>
+    </ul>
+    <div class="newBox">
+        <p>
+            <input type="checkbox" class="cho">
+            <strong>全选</strong>
+            <span>ID</span>
+            <span>姓名</span>
+            <span>年龄</span>
+            <span>性别</span>
+            <span>操作</span>
+        </p>
+        <ul class="newList"></ul>
+    </div>
+</div>
+<script>
+(function(){
+    var tri = document.querySelector('.tri');
+    var sexList = document.querySelector('.sexList');
+    var sexLis = document.querySelectorAll('.sexList li');
+    var sextext = document.querySelector('.sextext');
+    tri.onclick = function() {
+        sexList.style.display = "block";
+    }
+    sexLis.forEach(function(li,index){
+        li.onclick = function() {
+            sextext.innerHTML = li.innerHTML;
+            sexList.style.display = "none";
+        }
+    });
+})();
+
+(function(){
+    var btn = document.querySelector('.btn');
+    var newList = document.querySelector('.newList');
+    var nub = 1;
+    var nubs = 0;
+    btn.onclick = function () {
+        var inp1 = document.querySelector('.inp1');
+        var inp2 = document.querySelector('.inp2');
+        var sextext = document.querySelector('.sextext');
+        if(inp1.value == ''){
+            alert("请输入姓名");
+            return;
+        }
+        if(inp2.value == ''){
+            alert("请输入年龄");
+            return;
+        } else if(isNaN(inp2.value)) {
+            alert("请重新输入年龄");
+            return;
+        } else if(parseFloat(inp2.value) != parseInt(inp2.value)) {
+            alert("请重新输入年龄");
+            return;
+        }
+        if(sextext.innerHTML == ''){
+            alert("请选择性别");
+            return;
+        }
+        var li = document.createElement("li");
+        var p = document.createElement("p");
+        var input = document.createElement("input");
+        input.type = "checkbox";
+        input.className = "opt";
+        p.appendChild(input);
+        for(var i = 0; i < 5; i++){
+            var span = document.createElement("span");
+            switch(i){
+                case 0:
+                    span.innerHTML = nub;
+                    nub++;
+                    break;
+                case 1:
+                    span.innerHTML = inp1.value;
+                    break;
+                case 2:
+                    span.innerHTML = inp2.value;
+                    break;
+                case 3:
+                    span.innerHTML = sextext.innerHTML;
+                    break;
+                case 4:
+                    span.className = "del";
+                    break;
+            }
+            p.appendChild(span);
+        }
+        li.appendChild(p);
+        newList.appendChild(li);
+        inp1.value = '';
+        inp2.value = '';
+        sextext.innerHTML = '';
+        var newLis = document.querySelectorAll('.newList li');
+        var dels = document.querySelectorAll('.del');  
+        var opts = document.querySelectorAll('.opt');
+        var cho = document.querySelector('.cho');
+        cho.checked = false;
+        for(var i = 0; i < dels.length; i++){
+            dels[i].index = i;
+            dels[i].onclick = function(){
+                newList.removeChild(newLis[this.index]);
+                var opts = document.querySelectorAll('.opt');
+                var checksLength = 0;
+                for(var i = 0;i < opts.length; i++){
+                    if(opts[i].checked){
+                        checksLength++;
+                    }
+                }
+                if(checksLength == opts.length && opts.length != 0){
+                    cho.checked = true;
+                } else {
+                    cho.checked = false;
+                }
+            }
+        }
+        for(var i = 0; i < opts.length; i++){
+            opts[i].index = i;
+            opts[i].onchange = function () {
+                var checksLength = 0;
+                for(var i = 0;i < opts.length; i++){
+                    if(opts[i].checked){
+                        checksLength++;
+                    }
+                }
+                if(checksLength == opts.length){
+                    cho.checked = true;
+                } else {
+                    cho.checked = false;
+                }
+            }
+        }
+        cho.onchange = function () {
+            if(this.checked){
+                for(var i = 0; i < opts.length; i++){
+                    opts[i].checked = true;
+                }
+            } else {
+                for(var i = 0; i < opts.length; i++){
+                    opts[i].checked = false;
+                }
+            }
+        }
+    }
+})();
+</script>
+</body>
+</html>

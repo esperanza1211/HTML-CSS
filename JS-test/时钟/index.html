@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+p {
+    margin: 0;
+}
+img {
+    vertical-align: top;
+    border: none;
+    
+}
+.wrap {
+    width: 520px;
+    height: 520px;
+    background: url(img/bg.png) no-repeat;
+    margin: 50px auto;
+    position: relative;
+}
+.title {
+    width: 200px;
+    height: 45px;
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%);
+}
+.year {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    top: 150px;
+    text-align: center;
+    line-height: 37px;
+}
+.year .day,
+.time .times {
+    width: 25px;
+    height: 37px;
+    vertical-align: middle;
+}
+.time {
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    top: 250px;
+    text-align: center;
+    line-height: 37px;
+}
+.time .weekname {
+    width: 78px;
+    height: 38px;
+}
+.time .week {
+    width: 38px;
+    height: 36x;
+    vertical-align: middle;    
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <p class="title"><img src="img/title.png" /></p>
+    <div class="year">
+        <img src="img/0.png" class="day" />
+        <img src="img/0.png" class="day" />
+        <img src="img/0.png" class="day" />
+        <img src="img/0.png" class="day" />
+        <img src="img/year.png" />
+        <img src="img/0.png" class="day" />
+        <img src="img/0.png" class="day" />
+        <img src="img/month.png" />
+        <img src="img/0.png" class="day" />
+        <img src="img/0.png" class="day" />
+        <img src="img/seven.png" />
+    </div>
+    <div class="time">
+        <img src="img/0.png" class="times" />
+        <img src="img/0.png" class="times" />
+        <img src="img/sign.png" class="sign"/>
+        <img src="img/0.png" class="times" />
+        <img src="img/0.png" class="times" />
+        <img src="img/sign.png" class="sign"/>
+        <img src="img/0.png" class="times" />
+        <img src="img/0.png" class="times" />
+        <img src="img/week.png" class="weekname"/>
+        <img src="img/one.png" class="week" />
+    </div>
+</div>
+<script src="tween.js"></script>
+<script>
+(function(){
+	var signs = document.querySelectorAll('.sign');
+	var isShow = true;
+	setInterval(function(){
+		for(var i = 0; i < signs.length; i++){
+			signs[i].style.visibility = isShow?"hidden":"visible";
+		}
+		isShow = !isShow;
+	},500);
+})();
+(function(){
+    var days = document.querySelectorAll('.day');
+    var times = document.querySelectorAll('.times');
+    var week = document.querySelector('.week');
+    var nowyear = 00000000;
+    var nowtime = 000000;
+    var nowweek = 0;
+    var nextyear = null;
+    var arr = [
+        "img/seven.png",
+        "img/one.png",
+        "img/two.png",
+        "img/three.png",
+        "img/four.png",
+        "img/five.png",
+        "img/six.png"
+    ];
+    /*日期*/
+    var timersDay = setInterval(toyear,1000);
+    function getyear() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var date2 = date.getDate();
+        return year + toTwo(month) + toTwo(date2);
+    }
+    function toyear() {
+        var nextyear = getyear();
+        for(var i = 0; i < days.length; i++) {
+			if(nextyear[i] != nowyear[i]) {
+                moves(i, 0, 37);
+            }
+        }
+        nowyear = nextyear;
+    }
+    function moves(index, target, origin) {
+        var nextyear = getyear();
+        startMove(days[index], {'height': target}, 300, "easeOut", 
+            function() {
+                days[index].src = "img/"+ nextyear.charAt(index) +".png" ;
+                startMove(days[index], {'height': origin}, 300, "easeOut");
+            }
+        );
+    }
+    /*时间*/
+    var timer = setInterval(totime,1000);
+    function gettime() {
+        var date = new Date();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        return toTwo(hours) + toTwo(minutes) + toTwo(seconds);
+    }
+    function totime() {
+        var nexttime = gettime();
+        for(var i = 0; i < times.length; i++) {
+			if(nexttime[i] != nowtime[i]) {
+                move(i, 0, 37);
+            }
+        }
+        nowtime = nexttime;
+    }
+    function move(index, target, origin) {
+        var nexttime = gettime();
+        startMove(times[index], {'height': target}, 300, "easeOut", 
+            function() {
+                times[index].src = "img/"+ nexttime.charAt(index) +".png" ;
+                startMove(times[index], {'height': origin}, 300, "easeOut");
+            }
+        );
+    }
+    /*星期*/
+    var timerWeek = setInterval(getweek,1000);
+    function getweek() {
+        var date = new Date();
+        var weeks = date.getDay();
+        var nextweek = weeks;
+        if(nextweek != nowweek) {         
+            startMove(week,{height:0},300,"easeOut",
+                function() {
+                    week.src = arr[nextweek];
+                    startMove(week,{height:37},300,"easeOut");
+                }
+            );
+        }
+        nowweek = nextweek;
+    }
+    function toTwo(nub) {
+        return nub < 10 ? '0' + nub : '' + nub;
+    }
+})();
+</script>
+</body>
+</html>

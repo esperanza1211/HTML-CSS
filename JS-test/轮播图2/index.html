@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+p {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    width: 657px;
+    height: 516px;
+    background: url(img/bg.png);
+    margin: 30px auto;
+    position: relative;
+}
+.box {
+    position: absolute;
+    left: 142px;
+    top: 5px;
+    width: 380px;
+    height: 290px;
+    overflow: hidden;
+}
+.list {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 500%;
+    height: 100%;
+    background: red;
+}
+.list li {
+    position: absolute;
+    top: 0;    
+    width: 380px;
+    height: 290px;
+}
+.list li img {
+    width: 380px;
+    height: 290px;
+}
+p {
+    position: absolute;
+    left: 0;
+    bottom: -80px;
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, .7);
+    font: 30px/60px "微软雅黑";
+    color: #fff;
+    text-align: center;
+}
+</style>
+<script src="tween.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div class="box">
+        <ul class="list">
+            <li>
+                <img src="img/img1.jpg" />
+                <p>哈哈哈哈哈哈哈</p>
+            </li>
+            <li>
+                <img src="img/img2.jpg" />
+                <p>嘿嘿嘿嘿嘿</p>
+            </li>
+            <li>
+                <img src="img/img3.jpg" />
+                <p>呵呵呵呵</p>
+            </li>
+            <li>
+                <img src="img/img4.jpg" />
+                <p>啦啦啦啦</p>
+            </li>
+            <li>
+                <img src="img/img1.jpg" />
+                <p>哈哈哈哈哈哈哈</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+(function(){
+    var lis = document.querySelectorAll('.list li');
+    var liW = css(lis[0],"width");
+    for(var i = 0; i < lis.length; i++){
+        css(lis[i],"left",i*liW);
+    }
+    var list = document.querySelector('.list');
+    var ops = document.querySelectorAll('p');
+    var box = document.querySelector('.box');
+    var now = 0;
+    var timer;
+    startMove(ops[now],{bottom:0},500,"linear");
+    var num=0;
+    function next(){
+        if(now == 4){
+            css(ops[4],"bottom",-80);
+            now = 0;
+            css(ops[0],"bottom",0);
+            css(list,"left",-now*liW);
+        }
+        startMove(ops[now],{bottom:-80},500,"linear",function(){
+            now++;
+            startMove(list,{left:-now*liW},500,"linear",function(){
+                startMove(ops[now],{bottom:0},500,"linear",function(){
+                });
+            });
+        });
+    }
+    timer = setInterval(next,2000);
+    box.onmouseover = function(){
+        clearInterval(timer);
+    };
+    box.onmouseout = function(){
+        timer = setInterval(next,2000);
+    };
+})();
+</script>
+</body>
+</html>

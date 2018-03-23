@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+input {
+    padding: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    width: 500px;
+    height: 500px;
+    background: #ccc;
+}
+.text {
+    width: 300px;
+    height: 150px;
+    font: 16px/30px "宋体";
+    color: #000;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+.inp {
+    width: 60px;
+    height: 30px;
+    color: #fff;
+    border-radius: 15px;
+    border: 0;
+    background: blue;
+}
+.list {
+    width: 250px;
+    height: 250px;
+    border: 1px solid #000;
+    padding-left: 50px;
+}
+.list li {
+    width: 200px;
+    height: 30px;
+    font: 16px/30px "宋体";
+    background-color: blue;
+    border-radius: 5px;
+    color: #fff;
+    margin: 5px 0;
+    position: relative;
+}
+.list li span {
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 30px;
+    height: 30px;
+}
+.del {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    display: none;
+}
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <textarea class="text"></textarea>
+        <input type="button" class="inp" value="提交">
+        <ul class="list"></ul>
+    </div>
+<script>
+(function(){
+    var text = document.querySelector('.text');
+    var inp = document.querySelector('.inp');
+    var list = document.querySelector('.list');
+    inp.onclick = function () {
+        var str = text.value;
+        if(str == ''){
+            alert("输入文字");
+            return;
+        }
+        var li = document.createElement("li");
+        li.innerHTML = "<li><span></span>"+ str +"<input type='button' value='x' class='del'></li>";
+        list.appendChild(li);
+        text.value = '';
+        var lis = document.querySelectorAll('li');
+        var spans = document.querySelectorAll('span');
+        spans.forEach(function(span,index){
+            if(index%2 == 0){
+                span.style.backgroundColor = "black";
+            } else {
+                span.style.backgroundColor = "green";
+            }
+        });
+        lis.forEach(function(li,index){
+            var dels = li.querySelector('.del');
+            li.onmouseover = function (){
+                li.style.backgroundColor = "red";
+                dels.style.display = "block";
+                dels.onclick = function () {
+                    list.removeChild(li);
+                }
+            }
+            li.onmouseout = function (){
+                li.style.backgroundColor = "blue";
+                dels.style.display = "none";                
+            }
+        });
+    }
+})();
+</script>
+</body>
+</html>

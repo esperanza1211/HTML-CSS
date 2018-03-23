@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+p {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    width: 900px;
+    height: 500px;
+    background: #ccc;
+}
+.order {
+    width: 100px;
+    height: 50px;
+    border-radius: 20px;
+    border: none;
+    background: #f4f4f4;
+}
+.random {
+    width: 100px;
+    height: 50px;
+    border-radius: 20px;
+    border: none;
+    background: #f4f4f4;
+}
+.list {
+    width: 900px;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.list li {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    background: red;
+    border-radius: 10px;
+}
+.list p {
+    position: absolute;
+    left: 20px;
+    bottom: -15px;
+    width: 60px;
+    font: 16px/30px "微软雅黑";
+    text-align: center;
+    background: pink;
+    border-radius: 10px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <input type="button" value="从小到大" class="order">
+    <input type="button" value="打乱顺序" class="random">
+    <ul class="list"></ul>
+</div>
+<script src="tween.js"></script>
+<script>
+(function(){
+    var list = document.querySelector('.list');
+    var inner = '';
+    var L = 120;
+    var T = 140;
+    var nub = 0;
+    var arr = [
+        "1-粉红",
+        "2-粉黄",
+        "3-黄绿",
+        "4-嫩绿",
+        "5-湖蓝",
+        "6-蓝紫",
+        "7-粉紫",
+        "8-紫红"
+    ]
+    for(var i = 0; i < 2; i++){
+        for(var j = 0; j < 4; j++){
+            inner += '<li style="left:'+j*L+'px;top:'+T*i+'px"><p>'+arr[nub]+'</p></li>';
+            nub++;
+        }
+    }
+    list.innerHTML = inner;
+})();
+(function(){
+    var lis = document.querySelectorAll('.list li');
+    var op = document.querySelectorAll('p');
+    var order = document.querySelector('.order');
+    var random = document.querySelector('.random');
+    var arr = [];
+    lis.forEach(function(li){
+        var attr = {
+            left:css(li,"left"),
+            top:css(li,"top")
+        }
+        arr.push(attr);
+    })
+    var arr2 = [];
+    op.forEach(function(p){
+        var attr = p.innerHTML;
+        arr2.push(attr);
+    });
+    order.onclick = function () {
+        arr2.sort(function(a,b){
+            return parseInt(a) - parseInt(b);
+        });
+        for(var i = 0; i < lis.length; i++){
+            startMove(lis[parseInt(arr2[i])-1],arr[i],200,"linear");
+        }
+    }
+    random.onclick = function () {
+        arr2.sort(function(){
+            return (Math.random() - .5);
+        });
+        for(var i = 0; i < lis.length; i++){
+            startMove(lis[parseInt(arr2[i])-1],arr[i],200,"linear");
+        }
+    }
+})()
+</script>
+</body>
+</html>

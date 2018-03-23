@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+    margin: 0;
+}
+img {
+    border: none;
+    vertical-align: top;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    position: relative;
+    width: 700px;
+    height: 200px;
+    border: 1px solid #000;
+    margin: 30px auto;
+}
+.list {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+.list li:nth-of-type(1) {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    opacity: .5;
+}
+.list li:nth-of-type(2) {
+    position: absolute;
+    width:180px;
+    height:180px;
+    top:-15px;
+    left:140px;
+    z-index:30;
+    opacity:1;
+}
+.list li:nth-of-type(3) {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    left: 300px;
+    z-index: 20;
+    opacity: .5;
+}
+.list li img {
+    width: 100%;
+}
+.prev {
+    width: 50px;
+    height: 30px;
+}
+.next {
+    width: 50px;
+    height: 30px;
+}
+</style>
+</head>
+<body>
+<input type="button" value="prev" class="prev">
+<input type="button" value="next" class="next">
+<div class="wrap">
+    <ul class="list">
+        <li><img src="img/img0.jpg"/></li>
+        <li><img src="img/img1.jpg"/></li>
+        <li><img src="img/img2.jpg"/></li>
+    </ul>
+</div>
+<script src="tween.js"></script>
+<script>
+(function () {
+    var lis = document.querySelectorAll('.list li');
+    var prev = document.querySelector('.prev');
+    var next = document.querySelector('.next');
+    var arr = [];
+    lis.forEach(function(li){
+        var attr = {
+            width: css(li,"width"),
+            height: css(li,"height"),
+            left: css(li,"left"),
+            top: css(li,"top"),
+            zIndex: css(li,"zIndex"),
+            opacity: css(li,"opacity")
+        };
+        arr.push(attr);
+    })
+    prev.onclick = function () {
+        arr.unshift(arr.pop());
+        lis.forEach(function(li,index){
+            startMove(li,arr[index],200,"easeOut");
+        })
+    }
+    next.onclick = function () {
+        arr.push(arr.shift());
+        lis.forEach(function(li,index){
+            startMove(li,arr[index],200,"easeOut");
+        })
+    }
+})()
+</script>
+</body>
+</html>

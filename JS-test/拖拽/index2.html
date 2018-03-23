@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+    margin: 0;
+}
+.box {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: green;
+    cursor: move;
+}
+</style>
+</head>
+<body>
+<div class="box"></div>
+<script src="tween.js"></script>
+<script>
+var box = document.querySelector('.box');
+var startMouse = {x:0,y:0};
+var startEl = {x:0,y:0};
+box.onmousedown = function (e) {
+    startMouse = {x:e.clientX,y:e.clientY};
+    startEl = {x:css(box,"left"),y:css(box,"top")};
+    document.onmousemove = function (e) {
+        var nowMouse = {x:e.clientX,y:e.clientY};
+        var mouseDis = {
+            x : nowMouse.x - startMouse.x,
+            y : nowMouse.y - startMouse.y
+        };
+        var nowPos = {
+            x : startEl.x + mouseDis.x,
+            y : startEl.y + mouseDis.y
+        };
+        css(box,"left",nowPos.x);
+        css(box,"top",nowPos.y);
+    };
+    document.onmouseup = function () {
+        document.onmousemove = null;
+        document.onmouseup = null;
+    };
+}
+</script>
+</body>
+</html>

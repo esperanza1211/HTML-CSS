@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+p {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    width: 355px;
+    background: #dedeef;
+    border-radius: 24px;
+    padding: 5px;
+    margin: 30px auto;
+}
+.text {
+    width: 270px;
+    height: 36px;
+    border-radius: 19px;
+    border: 1px solid red;
+    text-indent: 30px;
+    font: 18px/36px Arial;
+}
+.btn {
+    width: 60px;
+    height: 36px;
+    border: 0;
+    border-radius: 18px;
+    background: #ea574f;
+}
+.list {
+    display: none;
+}
+.list li p {
+    width: 270px;
+    height: 30px;
+    text-indent: 16px;
+    font: 18px/30px Arial;
+    color: #000;
+    border-radius: 15px;
+    margin: 3px 0;
+}
+.show {
+    color: #fff;
+    background: #ea574e;
+}
+.active {
+    color: #fff;
+    background: #ea574e;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <input type="text" class="text">
+    <input type="button" value="GO" class="btn">
+    <ul class="list">
+        <li><p>html+css</p></li>
+        <li><p>html5+css3</p></li>
+        <li><p>javascript</p></li>
+        <li><p>angular</p></li>
+        <li><p>react</p></li>
+        <li><p>vue</p></li>
+        <li><p>jquery</p></li>
+        <li><p>nodejs</p></li>
+    </ul>
+</div>
+<script>
+(function(){
+    var text = document.querySelector('.text');
+    var list = document.querySelector('.list');
+    var oPs = document.querySelectorAll('.list p');
+    text.addEventListener("click",function(e){
+        list.style.display = "block";
+        oPs.forEach(function(p,index){
+            p.addEventListener('mouseover',function(){
+                if(p.className != 'active'){
+                    p.className = 'show';
+                }
+            });
+            p.addEventListener('mouseout',function(){
+                if(p.className != 'active'){
+                    p.className = '';
+                }
+            });
+            p.addEventListener('click',function(){
+                for(var i = 0; i < oPs.length; i++){
+                    oPs[i].className = '';
+                }
+                p.className = 'active';
+                text.value = this.innerHTML;
+                list.style.display = "none";
+            });
+        });
+        e.stopPropagation();
+    });
+    document.addEventListener('click',function(){
+        list.style.display = "none";
+    });
+})();
+</script>
+</body>
+</html>

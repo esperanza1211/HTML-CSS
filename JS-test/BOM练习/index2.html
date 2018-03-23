@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+p,
+h3,
+h4 {
+    margin: 0;
+    color :#a5abbc;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    width: 700px;
+    height: 460px;
+    margin: 30px auto;
+    position: relative;
+}
+/* ------------------------------------------ */
+.recruitList {
+    /* display: none; */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 700px;
+    height: 460px;
+    background: #20242d;
+    border-radius: 10px;
+}
+.nav {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    width: 95px;
+    height: 440px;
+    padding-top: 20px;
+}
+.nav a {
+    display: inline-block;
+    text-align: center;
+    margin: 20px 0;
+    cursor: pointer;
+    color: #a5abbc;
+}
+.nav a .active {
+    color: #9d1a2a;
+}
+.con {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 605px;
+    height: 460px;
+}
+.list {
+    width: 578px;
+    position: absolute;
+    right: 27px;
+    top: 80px;
+}
+.list li {
+    position: relative;
+    height: 80px;
+    font: 14px/16px "微软雅黑";
+    border-bottom: 2px dotted #282c35;
+    cursor: pointer;
+}
+.list li>a {
+    display: block;
+    height: 80px;
+}
+.list li .order {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    height: 55px;
+    width: 66px;
+    font: 30px/55px Arial;
+    text-indent: 30px;
+    border-left: 3px solid #2d323e;
+}
+.list li .text {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    width: 508px;
+    height: 40px;
+    font: 14px/16px "微软雅黑";
+    border-left: 2px solid #252932;
+}
+.list .text p {
+    width: 400px;
+    text-indent: 6px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.list .text time {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #5d6372;
+}
+.list .text span {
+    position: absolute;
+    right: 0;
+    top: 16px;
+    color: #d2d5e8;
+}
+.foot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 606px;
+    text-align: center;
+    font: 16px/44px Arial;
+}
+.foot a {
+    color: #a5abbc;
+    margin: 0 5px;
+}
+.foot .active {
+    color: red !important;
+}
+/* --------------------------------------------- */
+.recruitInfor {
+    display: none;
+    position: absolute;
+    left: 25px;
+    top: 0;
+    width: 650px;
+    height: 460px;
+    background: #20242d;
+    border-radius: 10px;
+}
+.header {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    width: 600px;
+    height: 160px;
+    border-bottom: 2px solid #282c35;
+}
+.ret {
+    position: absolute;
+    right: 165px;
+    top: 25px;
+    font: 14px/30px "微软雅黑";
+    color: #9d1a2a;
+}
+.btn {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    width: 110px;
+    font: 14px/26px "微软雅黑";
+    border: 2px solid #9d1a2a;
+    background: transparent;
+    border-radius: 30px;
+    color: #9d1a2a;
+    vertical-align: top;
+}
+.header h3 {
+    position: absolute;
+    left: 0;
+    top: 85px;
+    font: 24px/38px "微软雅黑";
+    color: #bdc2d7;
+}
+.header p {
+    position: absolute;
+    left: 0;
+    top: 120px;
+    font: 14px/28px "微软雅黑";
+    color: #bdc2d7;
+}
+.header time {
+    position: absolute;
+    right: 20px;
+    top: 120px;
+    font: 14px/28px "微软雅黑";
+    color: #5d6372;
+}
+.con2 {
+    position: absolute;
+    left: 25px;
+    top: 160px;
+    width: 600px;
+    height: 296px;
+}
+.con2 h4 {
+    font: 16px/26px "微软雅黑";
+    color: #bdc2d7;
+    margin-top: 10px;
+}
+.con2  p {
+    font: 14px/26px "微软雅黑";
+    color: #555c6a;
+}
+
+</style>
+<script>
+var data = {
+	social:[
+		{
+			name: "前端工程师11【社会招聘】",
+			number: "2名",
+			year: "3年以上",
+			education: "本科及以上",
+			place: "上海",
+			salary: "面议",
+			post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+			],
+			duty: [
+				"从事计算机软件的测试工作。"
+			],
+			time: "2013-7-14" 
+		},
+		{
+			name: "前端工程师22【社会招聘】",
+			number: "2名",
+			year: "3年以上",
+			education: "本科及以上",
+			place: "上海",
+			salary: "面议",
+			post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+			],
+			duty: [
+				"从事计算机软件的测试工作。"
+			],
+			time: "2013-7-14" 
+		},
+        {
+			name: "前端工程师33【社会招聘】",
+			number: "2名",
+			year: "3年以上",
+			education: "本科及以上",
+			place: "上海",
+			salary: "面议",
+			post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+			],
+			duty: [
+				"从事计算机软件的测试工作。"
+			],
+			time: "2013-7-14" 
+		},
+        {
+			name: "前端工程师44【社会招聘】",
+			number: "2名",
+			year: "3年以上",
+			education: "本科及以上",
+			place: "上海",
+			salary: "面议",
+			post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+			],
+			duty: [
+				"从事计算机软件的测试工作。"
+			],
+			time: "2013-7-14" 
+		},
+        {
+			name: "前端工程师55【社会招聘】",
+			number: "2名",
+			year: "3年以上",
+			education: "本科及以上",
+			place: "上海",
+			salary: "面议",
+			post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+			],
+			duty: [
+				"从事计算机软件的测试工作。"
+			],
+			time: "2013-7-14" 
+		},
+        {
+			name: "前端工程师66【社会招聘】",
+			number: "2名",
+			year: "3年以上",
+			education: "本科及以上",
+			place: "上海",
+			salary: "面议",
+			post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+			],
+			duty: [
+				"从事计算机软件的测试工作。"
+			],
+			time: "2013-7-14" 
+		}
+	],
+	campus:[
+        {
+            name: "前端工程师11【校园招聘】",
+            number: "2名",
+            year: "3年以上",
+            education: "本科及以上",
+            place: "上海",
+            salary: "面议",
+            post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+            ],
+            duty: [
+                "从事计算机软件的测试工作。"
+            ],
+            time: "2013-7-14" 
+        },
+        {
+            name: "前端工程师22【校园招聘】",
+            number: "2名",
+            year: "3年以上",
+            education: "本科及以上",
+            place: "上海",
+            salary: "面议",
+            post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+            ],
+            duty: [
+                "从事计算机软件的测试工作。"
+            ],
+            time: "2013-7-14" 
+        },
+        {
+            name: "前端工程师33【校园招聘】",
+            number: "2名",
+            year: "3年以上",
+            education: "本科及以上",
+            place: "上海",
+            salary: "面议",
+            post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+            ],
+            duty: [
+                "从事计算机软件的测试工作。"
+            ],
+            time: "2013-7-14" 
+        },
+        {
+            name: "前端工程师44【校园招聘】",
+            number: "2名",
+            year: "3年以上",
+            education: "本科及以上",
+            place: "上海",
+            salary: "面议",
+            post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+            ],
+            duty: [
+                "从事计算机软件的测试工作。"
+            ],
+            time: "2013-7-14" 
+        },
+        {
+            name: "前端工程师55【校园招聘】",
+            number: "2名",
+            year: "3年以上",
+            education: "本科及以上",
+            place: "上海",
+            salary: "面议",
+            post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+            ],
+            duty: [
+                "从事计算机软件的测试工作。"
+            ],
+            time: "2013-7-14" 
+        },
+        {
+            name: "前端工程师66【校园招聘】",
+            number: "2名",
+            year: "3年以上",
+            education: "本科及以上",
+            place: "上海",
+            salary: "面议",
+            post: [
+                '1.计算机或相关专业本科以上学历;',
+                '2.从事软件测试工作3年及以上;',
+                '3.具备良好的沟通能力和快速学习能力;',
+                '4.精通测试策略和方法、测试用例设计;',
+                '5.熟悉DB2、AIX等平台的基本操作;',
+                '6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。'
+            ],
+            duty: [
+                "从事计算机软件的测试工作。"
+            ],
+            time: "2013-7-14" 
+        }
+	]
+};
+</script>
+</head>
+<body>
+<div class="wrap"></div>
+<script>
+(function(){
+    var nowpage = 0;
+    var nub = 0;
+    var wrap = document.querySelector('.wrap');
+    var recruitList = document.createElement('div');
+    recruitList.className = 'recruitList';
+    var nav = document.createElement('nav');
+    nav.className = 'nav';
+    var social = document.createElement('a');
+    social.href = '#social';
+    social.className = 'social';
+    social.innerHTML = '<span>社会招聘</span>society';
+    var campus = document.createElement('a');
+    campus.href = '#campus';
+    campus.className = 'campus';
+    campus.innerHTML = '<span>校园招聘</span>campus';
+    nav.appendChild(social);
+    nav.appendChild(campus);
+
+    var con = document.createElement('div');
+    con.className = 'con';
+    var list = document.createElement('ul');
+    list.className = 'list';
+     
+    var foot = document.createElement('nav');
+    foot.className = 'foot';
+    
+    social.children[0].className = 'active';
+    
+    function topage(obj,add) {
+        foot.innerHTML = '';
+        var length = 4;
+        var pages = Math.ceil(obj.length / length);
+        if(nowpage > 0){
+            var prev = document.createElement('a');
+            prev.className = "prev";
+            prev.href = add +"_page_" + (nowpage - 1);
+            prev.innerHTML = "&lt;";
+            foot.appendChild(prev);
+        }
+        for(var i = 0; i < pages; i++){
+            var a = document.createElement('a');
+            a.href = add +"_page_" + i;
+            a.innerHTML = i + 1;
+            if(nowpage == i){
+                a.className = 'active';
+            } else {
+                a.className = '';                
+            }
+            foot.appendChild(a);
+        }
+        if(nowpage < pages-1){
+            var next = document.createElement('a');
+            next.className = next;
+            next.href = add +"_page_" + (nowpage + 1);
+            next.innerHTML = "&gt;";
+            foot.appendChild(next);
+        }
+        createli(obj,nowpage,add);
+    }
+
+    function createli(obj,nowpage,add) {
+        list.innerHTML = '';
+        var star = nowpage * 4;
+        var end = (nowpage + 1) * 4;
+        if(end > obj.length){
+            end = obj.length;
+        }
+        for(var i = star; i < end; i++){
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = add +"_" + (i);
+            var order = document.createElement('p');
+            order.className = 'order';
+            order.innerHTML = DB(i+1);
+            a.appendChild(order);
+
+            var text = document.createElement('div');
+            text.className = 'text';
+            var p = document.createElement('p');
+            p.innerHTML = "职位需求：" + obj[i].name + " 需求人数：" + obj[i].number;
+            text.appendChild(p);
+            var p = document.createElement('p');
+            p.innerHTML = "岗位要求：" + obj[i].post;
+            text.appendChild(p);
+            var time = document.createElement('time');
+            time.innerHTML = toYear();
+            text.appendChild(time);
+            var span = document.createElement('span');
+            span.innerHTML = '查看详情&gt;&gt;';
+            text.appendChild(span);
+            a.appendChild(text);
+            a.index = i;
+            a.onmouseover = function () {
+                this.style.backgroundColor = '#1c1e25';
+                this.children[0].style.color = '#f92746';
+                this.children[0].style.borderLeftColor = '#f92746';
+            }
+            a.onmouseout = function () {
+                this.style.backgroundColor = 'transparent';
+                this.children[0].style.color = '#a5abbc';
+                this.children[0].style.borderLeftColor = '#2d323e';
+            }
+            li.appendChild(a);
+            list.appendChild(li);
+        }
+    }
+    
+    con.appendChild(list);
+    con.appendChild(foot);    
+    recruitList.appendChild(nav);
+    recruitList.appendChild(con);
+
+/*--------------------------------------生成详细信息-------------------------------------*/
+    var recruitInfor = document.createElement('div');
+    recruitInfor.className = 'recruitInfor';
+    var header = document.createElement('div');
+    header.className = 'header';
+    var con2 = document.createElement('div');
+    con2.className = 'con2';
+
+    function createInfor(obj,index) {
+        header.innerHTML = '';
+        con2.innerHTML = '';
+
+        var ret = document.createElement('a');
+        ret.className = 'ret';
+        var hash = window.location.hash;
+        var hrefL = hash.substr(0,7);
+        var hrefR = Math.floor(parseInt(hash.substr(8,hash.length-1)) / 4);
+        ret.href = hrefL + "_page_" + hrefR;
+        ret.innerHTML = '&lt;返回招聘列表';
+        header.appendChild(ret);
+
+        var btn = document.createElement('input');
+        btn.type = 'button';
+        btn.className = 'btn';
+        btn.value = '投个简历';
+        header.appendChild(btn);
+
+        var h3 = document.createElement('h3');
+        h3.innerHTML = obj[index].name;
+        var p = document.createElement('p');
+        p.innerHTML = obj[index].salary + ' / ' + obj[index].place + ' / ' + obj[index].year + ' / ' + obj[index].education + ' / ' + obj[index].number;
+        var time = document.createElement('time');
+        time.innerHTML = toYear();
+        header.appendChild(h3);
+        header.appendChild(p);
+        header.appendChild(time);
+
+        var jobRequire = document.createElement('div');
+        jobRequire.className = 'jobRequire';
+        var h4 = document.createElement('h4');
+        h4.innerHTML = '岗位要求:';
+        jobRequire.appendChild(h4);
+
+        var respon = document.createElement('div');
+        respon.className = 'respon';
+        var h4 = document.createElement('h4');
+        h4.innerHTML = '工作职责:';
+        respon.appendChild(h4);
+
+        for(var i = 0; i < obj[index].post.length; i++) {
+            var p = document.createElement('p');
+            p.innerHTML = obj[index].post[i];
+            jobRequire.appendChild(p);
+        }
+        for(var i = 0; i < obj[index].duty.length; i++) {
+            var p = document.createElement('p');
+            p.innerHTML = obj[index].duty[i];
+            respon.appendChild(p);
+        }
+        con2.appendChild(jobRequire);
+        con2.appendChild(respon);
+    }
+
+
+    recruitInfor.appendChild(header);
+    recruitInfor.appendChild(con2);
+
+    wrap.appendChild(recruitList);
+    wrap.appendChild(recruitInfor);
+
+    function toYear() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        return year + '-' + DB(month) + '-' + DB(day);
+    }
+
+    function DB(n) {
+        return n < 10 ? '0' + n : '' + n;
+    }
+
+    setHash();
+    window.onhashchange = setHash;
+	function setHash(){
+		var hash = window.location.hash;
+        hash = hash == '' ? '#social' : hash;
+        var addrs = hash.substr(0,7);
+        var index= parseInt(hash.substr(13));
+        if(hash == '#social'){
+            recruitInfor.style.display = 'none';
+            recruitList.style.display = 'block';
+            campus.children[0].className = '';
+            social.children[0].className = 'active';
+            nowpage = 0;
+            topage(data.social,addrs);
+        } else if(hash == '#campus') {
+            recruitInfor.style.display = 'none';
+            recruitList.style.display = 'block';
+            social.children[0].className = '';
+            campus.children[0].className = 'active';
+            nowpage = 0;
+            topage(data.campus,addrs);
+        } else {
+            recruitInfor.style.display = 'none';
+            recruitList.style.display = 'block';
+            index = index?index:0;
+            nowpage = index;
+            nub = parseInt(hash.substr(8,hash.length-1));
+            if(addrs == '#social'){
+                topage(data.social,addrs);
+                if(!isNaN(hash.substr(8,1))){
+                    recruitList.style.display = 'none';
+                    recruitInfor.style.display = 'block';
+                    createInfor(data.social,nub);
+                }
+            } else {
+                topage(data.campus,addrs);
+                if(!isNaN(hash.substr(8,1))){
+                    recruitList.style.display = 'none';
+                    recruitInfor.style.display = 'block';
+                    createInfor(data.campus,nub);
+                }
+            }
+        }
+	}
+    
+})();
+</script>
+</body>
+</html>

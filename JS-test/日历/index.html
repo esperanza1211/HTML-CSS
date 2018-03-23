@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <section class="section">
+        <p class="nowDate"></p>
+        <div class="wrap">
+            <div class="calendar">
+                <div class="timeSw">
+                    <input type="button" value="prev" class="prev">
+                    <p class="date"></p>
+                    <input type="button" value="next" class="next">
+                </div>
+                <div class="DatelistWrap">
+                    <ul class="tenyearList">
+                        <li class="nowtenyearList">
+                            <ul class="list4"></ul>
+                        </li>
+                        <li class="nexttenyearList">
+                            <ul class="list4"></ul>
+                        </li>
+                    </ul>
+                    <ul class="yearList">
+                        <li class="nowyearList">
+                            <ul class="list3"></ul>
+                        </li>
+                        <li class="nextyearList">
+                            <ul class="list3"></ul>
+                        </li>
+                    </ul>
+                    <ul class="Datelist">
+                        <li class="nowDatelist">
+                            <ul class="list">
+                                <li>日</li>
+                                <li>一</li>
+                                <li>二</li>
+                                <li>三</li>
+                                <li>四</li>
+                                <li>五</li>
+                                <li>六</li>
+                            </ul>
+                            <ul class="list2"></ul>
+                        </li>
+                        <li class="nextDatelist">
+                            <ul class="list">
+                                <li>日</li>
+                                <li>一</li>
+                                <li>二</li>
+                                <li>三</li>
+                                <li>四</li>
+                                <li>五</li>
+                                <li>六</li>
+                            </ul>
+                            <ul class="list2"></ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clockMod">
+                <div class="clock">
+                    <div>
+                        <ul class="pointList"></ul>
+                        <div class="circular"></div>
+                        <div class="hoursNeedle"></div>
+                        <div class="minutesNeedle"></div>
+                        <div class="secondsNeedle"></div>
+                    </div>
+                </div>
+                <div>
+                    <p class="time"></p>
+                    <p class="week"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+<script src="tween.js"></script>
+<script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+    margin: 0;
+}
+input {
+    border: 0;
+    padding: 0;
+    color: #fff;
+    background: transparent;
+    font: 100px/120px Arial;
+    opacity: .5;
+}
+input:hover {
+    opacity: 1;
+}
+img {
+    border: none;
+    vertical-align: top;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    width: 616px;
+    height: 420px;
+    background: url(img/bg.png);
+    margin: 30px auto;
+    position: relative;
+}
+.list {
+    position: absolute;
+    left: 25px;
+    top: 32px;
+    width: 565px;
+    height: 355px;
+    overflow: hidden;
+}
+.list li {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 565px;
+    height: 355px;
+}
+.list li img {
+    width: 565px;
+    height: 355px;
+}
+.left {
+    position: absolute;
+    left: 30px;
+    top: 100px;
+}
+.right {
+    position: absolute;
+    right: 30px;
+    top: 100px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="list">
+        <li><img src="img/img0.png"/></li>
+        <li><img src="img/img1.png"/></li>
+    </ul>
+    <input type="button" class="left" value=&lt>
+    <input type="button" class="right" value=&gt>
+</div>
+<script src="tween.js"></script>
+<script>
+(function(){
+    var arr = [
+        "img/img0.png",
+        "img/img1.png",
+        "img/img2.png",
+        "img/img3.png"
+    ];
+    var lis = document.querySelectorAll('li');
+    var imgs = document.querySelectorAll('img');
+    var left = document.querySelector('.left');
+    var right = document.querySelector('.right');
+    var nub = 0;
+    var liW = css(lis[0],"width");
+    var liH = css(lis[0],"height");    
+    imgs[1].src = arr[nub];
+    right.addEventListener("click",function(){
+        console.log(nub);
+        tonext('left',liW);
+    });
+    left.addEventListener("click",function(){
+        console.log(nub);        
+        toprev('left',-liW);
+    });
+    document.addEventListener('keydown',function(e){
+        console.log(nub);        
+        switch(e.keyCode){
+            case 37:
+                toprev('left',-liW);
+                e.preventDefault();
+                break;
+            case 38:
+                toprev('top',-liH);
+                e.preventDefault();
+                break;
+            case 39:
+                tonext('left',liW);
+                e.preventDefault();
+                break;
+            case 40:
+                tonext('top',liH);
+                e.preventDefault();
+                break;
+        }
+    })
+    var startMouse = {
+        x:0,
+        y:0
+    };
+    document.addEventListener('mousedown',down);
+    function down(e) {
+        startMouse = {
+            x:e.clientX,
+            y:e.clientY
+        };
+        document.addEventListener('mousemove',move);
+        document.addEventListener('mouseup',up);
+        e.preventDefault();
+    }
+    var disMouse = {
+        x:0,
+        y:0
+    }
+    function move(e) {
+        var nowMouse = {
+            x:e.clientX,
+            y:e.clientY
+        };
+        disMouse = {
+            x:startMouse.x - nowMouse.x,
+            y:startMouse.y - nowMouse.y
+        };
+    }
+    function up() {
+        console.log(nub);        
+        if(disMouse.x > 200 && -100 < disMouse.y && disMouse.y < 100){
+            toprev('left',-liW);
+        }else if(disMouse.x < -200 && -100 < disMouse.y && disMouse.y < 100){
+            tonext('left',liW);
+        }else if(-100 < disMouse.x && disMouse.x < 100 && disMouse.y > 200){
+            toprev('top',-liH);
+        }else if(-100 < disMouse.x && disMouse.x < 100 && disMouse.y < -200){
+            tonext('top',liH);
+        }
+        document.removeEventListener('mousemove',move);
+        document.removeEventListener('mouseup',up);
+    }
+    function tonext(direction,range) {
+        nub++;
+        if(nub > arr.length - 1){
+            nub = 0;
+        }
+        imgs[0].src = arr[nub];
+        var obj = {};
+        obj[direction] = range;
+        startMove(lis[1],obj,200,'linear',function(){
+            imgs[1].src = arr[nub];
+            css(lis[1],direction,0);
+        });
+    }
+    function toprev(direction,range) {
+        nub--;
+        if(nub < 0){
+            nub = arr.length - 1;
+        }
+        imgs[0].src = arr[nub];
+        var obj = {};
+        obj[direction] = range;
+        startMove(lis[1],obj,200,'linear',function(){
+            imgs[1].src = arr[nub];
+            css(lis[1],direction,0);
+        });
+    }
+})();
+</script>
+</body>
+</html>

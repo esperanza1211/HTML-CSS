@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="css/index2.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="box">
+            <ul class="list">
+                <li><img src="img/img5.jpg"/></li>                    
+                <li><img src="img/img1.jpg"/></li>
+                <li><img src="img/img2.jpg"/></li>
+                <li><img src="img/img3.jpg"/></li>
+                <li><img src="img/img4.jpg"/></li>
+                <li><img src="img/img5.jpg"/></li>
+                <li><img src="img/img1.jpg"/></li>                
+            </ul>
+            <ul class="list2">
+                <li class="diamonds" style="height: 30px;"></li>
+                <li class="diamonds"></li>
+                <li class="diamonds"></li>
+                <li class="diamonds"></li>
+                <li class="diamonds"></li>
+            </ul>
+            <span id="prev"></span>
+            <span id="next"></span>
+        </div>
+    </div>
+<script>
+window.onload = function(){
+    (function(){
+        var olist = document.querySelector('.list');
+        var lis = document.querySelectorAll('.list li');
+        var lis2 = document.querySelectorAll('.diamonds');
+        var prev = document.querySelector('#prev');
+        var next = document.querySelector('#next');
+        var nub = 1;
+        for(var i = 0; i < lis.length; i++){
+            prev.onclick = function(){
+                startMove(lis2[nub-1],'height',15);
+                nub--;
+                if(nub == 0){
+                    startMove(olist,'marginLeft','-'+420*nub,function(){
+                        nub = 5;
+                        olist.style.marginLeft = '-'+420*nub+'px';
+                    });
+                    startMove(lis2[4],'height',30);
+                }else {
+                    startMove(olist,'marginLeft','-'+420*nub);
+                    startMove(lis2[nub-1],'height',30);
+                }
+            }
+            next.onclick = function(){           
+                startMove(lis2[nub-1],'height',15);                              
+                nub++;
+                if(nub == 6){
+                    startMove(olist,'marginLeft','-'+420*nub,function(){
+                        nub = 1;
+                        olist.style.marginLeft = '-'+420*nub+'px';
+                    });
+                    startMove(lis2[0],'height',30);
+                }else {
+                    startMove(olist,'marginLeft','-'+420*nub);
+                    startMove(lis2[nub-1],'height',30);
+                }
+            }
+        }
+        for(var i = 0; i < lis2.length; i++){
+            lis2[i].index = i;
+            lis2[i].onclick = function(){
+                for(var i = 0; i < lis2.length; i++){
+                    startMove(lis2[i],'height',15);
+                }
+                nub = this.index+1;
+                startMove(olist,'marginLeft','-'+420*nub);
+                startMove(lis2[nub-1],'height',30);                     
+            }
+        }
+        function css(el,attr,val){
+            if(arguments.length > 2){
+                el.style[attr] = val;
+            } else {
+                return getComputedStyle(el)[attr];            
+            }
+        }
+        function startMove(el,attr,target,endFn){
+            clearInterval(el.timer);
+            var now = parseFloat(css(el,attr))
+            var speed = target>now?5:-5;
+            el.timer = setInterval(function(){
+                var val = parseFloat(css(el,attr));
+                if(val == target){
+                    clearInterval(el.timer);
+                    endFn&&endFn();
+                } else {
+                    val = val + speed;
+                    css(el,attr,val + "px");
+                }
+            },20);
+        }
+    })()
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+    margin: 0;
+}
+img {
+    border: none;
+    vertical-align: top;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    position: relative;
+    width: 700px;
+    height: 200px;
+    border: 1px solid #000;
+    margin: 30px auto;
+}
+.list {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+.list li {
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 150px;
+}
+.list li img {
+    width: 150px;
+    height: 150px;
+}
+.prev {
+    /* position: absolute;
+    left: 0;
+    top: 50%; */
+    width: 50px;
+    height: 30px;
+}
+.next {
+    /* position: absolute;
+    right: 0;
+    top: 50%; */
+    width: 50px;
+    height: 30px;
+}
+</style>
+</head>
+<body>
+        <input type="button" value="prev" class="prev">
+        <input type="button" value="next" class="next">
+<div class="wrap">
+    <ul class="list">
+        <li><img src="img/img0.jpg"/></li>
+        <li><img src="img/img1.jpg"/></li>
+        <li><img src="img/img2.jpg"/></li>
+    </ul>
+</div>
+
+<script src="tween.js"></script>
+<script>
+(function () {
+    var lis = document.querySelectorAll('.list li');
+    var imgs = document.querySelectorAll('.list img');
+    var prev = document.querySelector('.prev');
+    var next = document.querySelector('.next');
+    var liW = 160;
+    // var arr = [];
+    // fn();
+    // function fn() {
+    //     for(var i = 0; i < lis.length; i++) {
+    //         lis[i].style.left = arr[i]*liW+"px";
+    //     }
+    // }
+   
+    var arr = [
+        {width:150,
+        height:150,
+        top:0,
+        left:0,
+        zIndex:1,
+        opacity:.5},
+        {width:180,
+        height:180,
+        top:-15,
+        left:140,
+        zIndex:2,
+        opacity:1},
+        {width:150,
+        height:150,
+        top:0,
+        left:300,
+        zIndex:1,
+        opacity:.5},
+    ];
+    var arr2 = [
+        {width:150,
+        height:150},
+        {width:180,
+        height:180},
+        {width:150,
+        height:150},
+    ];
+    lis.forEach(function(li,index){
+        for(var s in arr[index]){
+            css(li,s,arr[index][s]);
+        }
+    })
+    imgs.forEach(function(img,index){
+        for(var s in arr2[index]){
+            css(img,s,arr[index][s]);
+        }
+    })
+    // lis.forEach(function(li,index){
+    //     arr.push(css(li,"left")) ;
+    // })
+
+    prev.onclick = function () {
+        arr.unshift(arr.pop());
+        arr2.unshift(arr2.pop());
+        lis.forEach(function(li,index){
+            for(var s in arr[index]){
+                css(li,s,arr[index][s]);
+            }
+        })
+        imgs.forEach(function(img,index){
+            for(var s in arr2[index]){
+                css(img,s,arr[index][s]);
+            }
+        })
+    }
+    next.onclick = function () {
+        arr.push(arr.shift());
+        arr2.push(arr2.shift());
+        lis.forEach(function(li,index){
+            for(var s in arr[index]){
+                css(li,s,arr[index][s]);
+            }
+        })
+        imgs.forEach(function(img,index){
+            for(var s in arr2[index]){
+                css(img,s,arr[index][s]);
+            }
+        })
+    }
+})()
+</script>
+</body>
+</html>

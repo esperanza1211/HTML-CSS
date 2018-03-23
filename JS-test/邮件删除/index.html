@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div class="wrap">
+    <div class="header">
+        <div class="header-left">
+            <a href="#">
+                <img src="img/logo.png" />
+            </a>
+        </div>
+        <div class="header-right">
+            <p>
+                <a href="#">邮箱首页</a>
+                <span>|</span>
+                <a href="#">设置</a>
+            </p>
+        </div>
+    </div>
+    <div class="box">
+        <div class="nav">
+            <ul class="nav-list">
+                <li>写信</li>
+                <li>收信</li>
+                <li>通讯录</li>
+            </ul>
+            <ul class="subnav-list">
+                <li class="active">收件箱</li>
+                <li>星标邮件</li>
+                <li>群邮件</li>
+                <li>草稿箱</li>
+                <li>已发送</li>
+                <li id="del">已删除</li>
+                <li>垃圾箱</li>
+            </ul>
+        </div>
+        <div class="con">
+            <h3>收件箱(共96封,其中<a href="#">未读邮件</a>9封)</h3>
+            <ul class="operate-list">
+                <li class="active">删除</li>
+                <li>彻底删除</li>
+                <li>转发</li>
+                <li>举报</li>
+                <li>全部标为已读</li>
+                <li>标记为…</li>
+                <li>移动到…</li>
+            </ul>
+            <div class="toolbar">
+                <input type="checkbox" id="check">
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="list">
+                <li class="lis">
+                    <div>
+                        <input type="checkbox" class="btn">
+                        <h4>妙味课堂1</h4>
+                        <time>2015-12-30</time>
+                    </div>
+                    <p>JS拖拽的进一步学习，移动与拉伸JS拖拽的进一步练习</p>
+                </li>
+                <li class="lis">
+                    <div>
+                        <input type="checkbox" class="btn">
+                        <h4>妙味课堂2</h4>
+                        <time>2015-12-30</time>
+                    </div>
+                    <p>JS拖拽的进一步学习，移动与拉伸JS拖拽的进一步练习</p>
+                </li>
+                <li class="lis">
+                    <div>
+                        <input type="checkbox" class="btn">
+                        <h4>妙味课堂3</h4>
+                        <time>2015-12-30</time>
+                    </div>
+                    <p>JS拖拽的进一步学习，移动与拉伸JS拖拽的进一步练习</p>
+                </li>
+                <li class="lis">
+                    <div>
+                        <input type="checkbox" class="btn">
+                        <h4>妙味课堂4</h4>
+                        <time>2015-12-30</time>
+                    </div>
+                    <p>JS拖拽的进一步学习，移动与拉伸JS拖拽的进一步练习</p>
+                </li>
+                <li class="lis">
+                    <div>
+                        <input type="checkbox" class="btn">
+                        <h4>妙味课堂5</h4>
+                        <time>2015-12-30</time>
+                    </div>
+                    <p>JS拖拽的进一步学习，移动与拉伸JS拖拽的进一步练习</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+(function(){
+    var wrap = document.querySelector('.wrap');
+    var list = document.querySelector('.list');
+    var lis = list.getElementsByTagName('li');
+    var del = document.querySelector('#del');
+    var check = document.querySelector('#check');
+    var btns = list.getElementsByTagName('input');
+    for(var i = 0; i < lis.length; i++){
+        
+        lis[i].addEventListener('mouseover',function(){
+            this.className = 'show';
+        });
+        lis[i].addEventListener('mouseout',function(){
+            if(!this.children[0].children[0].checked){
+                this.className = '';
+            }
+        });
+        lis[i].addEventListener('mousedown',function(e){
+            if(e.target.tagName == 'INPUT'){
+                return;
+            }
+            if(this.children[0].children[0].checked){
+                var startMouse = {
+                    x:e.clientX,
+                    y:e.clientY
+                };
+                var mouseBox = document.createElement('div');
+                mouseBox.className = 'mouseBox';
+                mouseBox.style.left = startMouse.x + 'px';
+                mouseBox.style.top = startMouse.y + 'px';
+                var nub = 0;
+                for(var i = 0; i < btns.length; i++){
+                    if(btns[i].checked){
+                        nub++;
+                    }
+                }
+                mouseBox.innerHTML = "选中"+nub+"封邮件";
+                wrap.appendChild(mouseBox);
+                document.addEventListener('mousemove',tomove);
+                document.addEventListener('mouseup',toup);
+            }
+        });
+    }
+    function tomove(e) {
+        e.preventDefault();
+        var mouseBox = document.querySelector('.mouseBox');
+        var nowMouse = {
+            x:e.clientX,
+            y:e.clientY
+        };
+        mouseBox.style.left = nowMouse.x + 'px';
+        mouseBox.style.top = nowMouse.y + 'px';
+    }
+    function toup() {
+        var mouseBox = document.querySelector('.mouseBox');
+        if(collision (mouseBox,del)){
+            var lis = document.querySelectorAll('.list li');
+            for(var i = 0; i < lis.length; i++){
+                var checked = lis[i].children[0].children[0].checked;
+                if(checked){
+                    list.removeChild(lis[i]);
+                }
+            }
+        }
+        wrap.removeChild(mouseBox);
+        toCheckAll();
+        document.removeEventListener('mousemove',tomove);
+        document.removeEventListener('mouseup',toup);
+    }
+    function collision (el,el2){
+        var rect = el.getBoundingClientRect();
+        var rect2 = el2.getBoundingClientRect();
+        if(rect.bottom < rect2.top
+        || rect.top > rect2.bottom
+        || rect.right < rect2.left
+        || rect.left > rect2.right){
+            return false;
+        }
+        return true;
+    }
+    for(var i = 0; i < btns.length; i++){
+        btns[i].addEventListener('change',function(e){
+            if(this.checked){
+                this.parentNode.parentNode.className = "active";
+            } else {
+                this.parentNode.parentNode.className = "";
+            }
+            toCheckAll();
+        });
+    }
+    function toCheckAll(){
+        var isCheckAll = getChecked(btns);
+        check.checked = isCheckAll;
+    };
+    function getChecked(btns){
+        if(btns.length == 0) {
+            return false;
+        }
+        for(var i = 0; i < btns.length; i++){
+            if(!btns[i].checked){
+                return false;
+            }
+        }
+        return true;
+    };
+    check.addEventListener('change',function(){
+        if(this.checked){
+            for(var i = 0; i < btns.length; i++){
+                lis[i].className = 'active';
+                btns[i].checked = true;
+            }
+        } else {
+            for(var i = 0; i < btns.length; i++){
+                lis[i].className = '';
+                btns[i].checked = false;
+            }
+        }
+    });
+})();
+</script>
+</body>
+</html>

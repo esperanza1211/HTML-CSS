@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.circle {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: red;
+}
+</style>
+</head>
+<body>
+<div class="circle"></div>
+<script src="tween.js"></script>
+<script>
+(function(){
+    var circle = document.querySelector('.circle');
+    var circleW = css(circle,'width');
+    var R = circleW / 2;
+    var v = 0;
+    var t = 0;
+    var g = 9.8;
+    var th = 0;
+    var Vmax = null;
+    var Hmax = null;
+    circle.onmousedown = function(e){
+        var startMouse = {
+            x:e.clientX,
+            y:e.clientY
+        };
+        var startEl = {
+            x: circle.offsetLeft,
+			y: circle.offsetTop
+        };
+        document.onmousemove = function(e){
+            var nowMouse = {
+                x:e.clientX,
+                y:e.clientY
+            };
+            var dis = {
+                x:nowMouse.x - startMouse.x,
+                y:nowMouse.y - startMouse.y
+            };
+            var nowEl = {
+                x: startEl.x + dis.x,
+			    y: startEl.y + dis.y
+            };
+            if(nowEl.x < 0){
+                nowEl.x = 0;
+            }else if(nowEl.x > (window.innerWidth - circleW)){
+                nowEl.x = window.innerWidth - circleW;
+            }
+            if(nowEl.y < 0){
+                nowEl.y = 0;
+            }else if(nowEl.y > (window.innerHeight - circleW)){
+                nowEl.y = window.innerHeight - circleW;
+            }
+            css(circle,'left',nowEl.x);
+            css(circle,'top',nowEl.y);
+        }
+        document.onmouseup = function(){
+            freeFall();
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    };
+    function freeFall() {
+        var rect = circle.getBoundingClientRect();
+        var h = window.innerHeight - rect.bottom;
+        if (Vmax == null) {
+            Vmax = Math.sqrt(2*g*h);
+        }
+        th += t;
+        v = g * th;
+        h = h - v * t;
+        var top = window.innerHeight - h - rect.height;
+        if(h <= 0){
+            th = 0;
+            Hmax = null;
+            top = window.innerHeight - rect.height;
+            startMove(circle,{top:top},t,'linear',toUp);
+        }else{
+            startMove(circle,{top:top},t,'linear',function(){
+                t = 1;
+                freeFall();
+            });
+        }
+    }
+    function toUp() {
+        var rect = circle.getBoundingClientRect();
+        var h = window.innerHeight - rect.bottom;
+        if(th == 0) {
+            h = 0;
+        }
+        if (Hmax == null) {
+            Hmax = (v * v) / (2 * g);
+        }
+        th += t;
+        v = Vmax - g * th;
+        h = h + v * t;
+        if(h < 0){
+            v=0;
+            Vmax = null;
+            return;
+        }
+        var top = window.innerHeight - h - rect.height;
+        if(v <= 0){
+            v = 0;
+            th = 0;
+            Vmax = null;
+            top = window.innerHeight - h - rect.height;
+            startMove(circle,{top:top},t,'linear',freeFall);
+        } else {
+            startMove(circle,{top:top},t,'linear',function(){
+                t=1;
+                toUp();
+            });
+        }
+    }
+})();
+</script>
+</body>
+</html>

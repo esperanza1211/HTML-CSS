@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.list {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    border: 1px solid #000;
+}
+.list li {
+    width: 200px;
+    font: bold 12px/20px "微软雅黑";
+    background: #fff;
+    position: relative;
+    vertical-align: middle; 
+    margin: 3px 0;   
+}
+.list>li:nth-of-type(2),
+.list>li:nth-of-type(5),
+.list>li:nth-of-type(7) {
+    border-bottom: 1px solid #000;
+}
+.list li a {
+    vertical-align: top;
+    display: inline-block;
+    width: 192px;
+    color: #000;
+    text-indent: 5px;
+    text-decoration: none;
+    padding: 1px;
+}
+.list2,
+.list3 {
+    display: none;
+    position: absolute;
+    left: 190px;
+    top: 0;
+    width: 200px;
+    border: 1px solid #000;
+    background: #fff;
+    z-index: 2;
+}
+.list>li:nth-of-type(1)>a:after,
+.list>li:nth-of-type(2)>a:after,
+.list>li:nth-of-type(7)>a:after,
+.list>li:nth-of-type(7)>.list2>li>a:after {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    content: '';
+    display: block;
+    border: 5px solid transparent;
+    border-left-color: #000;
+    z-index: 5;
+}
+.list li .hover {
+    background: rgba(255, 0, 0, .5);
+    padding: 0;
+    border: 1px solid blue;
+}
+
+</style>
+</head>
+<body>
+    <ul class="list">
+        <li>
+            <a href="#">查看</a>
+            <ul class="list2">
+                <li><a href="#">大图标</a></li>
+                <li><a href="#">中等图标</a></li>
+                <li><a href="#">小图标</a></li>
+                <li><a href="#">自动排列图标</a></li>
+                <li><a href="#">将图标与网格对齐</a></li>
+                <li><a href="#">显示桌面图标</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">排序方式</a>
+            <ul class="list2">
+                <li><a href="#">名称</a></li>
+                <li><a href="#">大小</a></li>
+                <li><a href="#">项目类型</a></li>
+                <li><a href="#">修改日期</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Git GUI Here</a></li>
+        <li><a href="#">Git Bash Here</a></li>
+        <li><a href="#">Open with Code</a></li>
+        <li><a href="#">图形属性</a></li>
+        <li>
+            <a href="#">图形选项</a>
+            <ul class="list2">
+                <li>
+                    <a href="#">屏幕适配</a>
+                    <ul class="list3">
+                        <li><a href="#">保持屏幕缩放比</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">快捷键</a>
+                    <ul class="list3">
+                        <li><a href="#">启用</a></li>
+                        <li><a href="#">禁用</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">系统托盘图标</a>
+                    <ul class="list3">
+                        <li><a href="#">启用</a></li>
+                        <li><a href="#">禁用</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">旋转</a>
+                    <ul class="list3">
+                        <li><a href="#">旋转至0度</a></li>
+                        <li><a href="#">旋转至90度</a></li>
+                        <li><a href="#">旋转至180度</a></li>
+                        <li><a href="#">旋转至270度</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">视频配置式</a>
+                    <ul class="list3">
+                        <li><a href="#">提高电影亮度</a></li>
+                        <li><a href="#">降低电影亮度</a></li>
+                        <li><a href="#">默认配置式</a></li>
+                        <li><a href="#">鲜艳的色彩</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">屏幕分辨率</a></li>
+        <li><a href="#">个性化</a></li>        
+    </ul>
+<script src="tween.js"></script>
+<script>
+(function(){
+    var list2 = document.querySelectorAll('.list2');
+    var lis = document.querySelectorAll('li');
+    var lis2 = document.querySelectorAll('.list2 li');
+    var windowEl = {
+        x:document.documentElement.clientWidth,
+        y:document.documentElement.clientHeight
+    };
+    document.addEventListener('contextmenu',function(e){
+        var list = document.querySelector('.list');
+        e.preventDefault();
+        var mouse = {
+            x:e.clientX,
+            y:e.clientY
+        };
+        list.style.display = 'block';
+        var listH = list.offsetHeight;
+        var listW = list.offsetWidth;
+        var listL = 0;
+        var listT = 0;        
+        if(mouse.x > windowEl.x - listW){
+            listL = mouse.x - listW;
+        } else {
+            listL = mouse.x;
+        }
+        if(mouse.y > windowEl.y - listH){
+            listT = mouse.y - listH;
+        } else {
+            listT = mouse.y;
+        }
+        list.style.left = listL + 'px';
+        list.style.top = listT + 'px';
+        move();
+    });
+    function move(e) {
+        lis.forEach(function(li,index){
+            li.addEventListener('mouseover', function(){
+                li.children[0].className = 'hover';
+                if(li.children.length > 1){ 
+                    clearTimeout(li.timer);                                
+                    li.timer = setTimeout(function(){
+                        li.children[1].style.display = 'block';
+                        var lisH = li.children[1].offsetHeight;
+                        var lisW = li.children[1].offsetWidth;
+                        li.children[1].style.left = (lisW-10) + 'px';
+                        li.children[1].style.top = '0px';  
+                        var lisR = li.children[1].getBoundingClientRect().right;
+                        var lisB = li.children[1].getBoundingClientRect().bottom;
+                        if(lisR > windowEl.x){
+                            li.children[1].style.left = -(lisW-10) + 'px';
+                        } 
+                        if(lisB > windowEl.y){
+                            li.children[1].style.top = -(lisH-10) + 'px';
+                        }
+                    },500);
+                }
+            });
+            li.addEventListener('mouseout',function(e){
+                li.children[0].className = '';
+                if(li.children.length > 1){
+                    var len = li.children[1].children.length;
+                    // for(var i = 0; i < len; i++){
+                    //     if(li.children[1].children[i].className != ''){
+                    //         return;
+                    //     }
+                    // }
+                    clearTimeout(li.timer);
+                    li.timer = setTimeout(function(){
+                        li.children[1].style.display = 'none';
+                    },500);
+                }
+                e.stopPropagation();
+            })
+        })
+    }
+    document.addEventListener('mousedown',function(e){
+        var list = document.querySelector('.list');
+        list.style.display = 'none';
+    })
+})();
+</script>
+</body>
+</html>

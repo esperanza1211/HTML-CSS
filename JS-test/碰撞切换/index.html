@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+body {
+    margin: 0;
+}
+.wrap {
+    width: 550px;
+    height: 550px;
+    border: 1px solid #000;
+    margin: 50px auto; 
+}
+.list {
+    width: 550px;
+    height: 550px;
+    position: relative;
+}
+.list li {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    background: #ccc;
+    padding: 2px;
+}
+.list .active {
+    padding: 0;
+    border: 2px solid blue;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="list">
+    </ul>
+</div>
+<script src="tween.js"></script>
+<script>
+(function(){
+    var list = document.querySelector('.list');
+    var liW = 110;
+    var liH = 110;
+    var inner = '';
+    for(var i = 0; i < 25; i++){
+        var x = i%5;
+	    var y = parseInt(i/5);
+        inner += '<li style="left:'+x*liW+'px;top:'+y*liH+'px">'+i+'</li>';
+    }
+    list.innerHTML = inner;
+})();
+(function(){
+    var lis = document.querySelectorAll('.list li');
+    var arr = [];
+    var data = [];
+    var startMouse = {
+        x:0,
+        y:0
+    }
+    var startEl = {
+        x:0,
+        y:0
+    }
+    var nowIndex = 0;
+    var nextIndex = 0;
+    var nextElement;
+    lis.forEach(function(li,index){
+        li.index = index;
+        arr.push(li);
+        data.push({
+            left:css(li,'left'),
+            top:css(li,'top')
+        });
+        li.addEventListener('mousedown',function(e){
+            nowIndex = li.index;
+            startMouse = {
+                x:e.clientX,
+                y:e.clientY
+            };
+            startEl = {
+                x:css(li,'left'),
+                y:css(li,'top')
+            };
+            document.addEventListener('mousemove',toMove);
+            document.addEventListener('mouseup',toUp);
+        })
+        function toMove(e) {
+            e.preventDefault();
+            var nowMouse = {
+                x:e.clientX,
+                y:e.clientY
+            };
+            var dis = {
+                x:nowMouse.x - startMouse.x,
+                y:nowMouse.y - startMouse.y
+            };
+            var nowEl = {
+                x:startEl.x + dis.x,
+                y:startEl.y + dis.y
+            }
+            css(li,'left',nowEl.x);
+            css(li,'top',nowEl.y);
+            var lis = document.querySelectorAll('.list li');
+            for(var i = 0; i < arr.length; i++){
+                if(collision(li,arr[i]) && i != nowIndex){
+                    arr[i].className = 'active';
+                    nextIndex = i;
+                    nextElement = arr[i];
+                }else{
+                    arr[i].className = '';
+                }
+            }
+            if(!nextElement){
+                nextIndex = nowIndex;
+                nextElement = arr[nowIndex]
+            }
+        }
+        function toUp() {
+            startMove(li,{left:data[nextIndex].left,top:data[nextIndex].top},300,'linear');
+            startMove(nextElement,{left:data[nowIndex].left,top:data[nowIndex].top},300,'linear',function(){
+                nextElement.className = '';
+                arr[nextIndex] = arr[nowIndex];
+                arr[nowIndex] = nextElement;
+                arr[nowIndex].index = nowIndex;
+                arr[nextIndex].index = nextIndex;
+                nextElement = null;
+                nextIndex = null;
+            });
+            document.removeEventListener('mousemove',toMove);
+            document.removeEventListener('mouseup',toUp);
+        }
+    });
+})();
+function collision (el,el2){
+    var rect = el.getBoundingClientRect();
+    var rectCenter = {
+        x:rect.right - (el.offsetWidth/2),
+        y:rect.bottom - (el.offsetHeight/2)
+    }
+    var rect2 = el2.getBoundingClientRect();
+    if(rectCenter.y > rect2.top
+    && rectCenter.y < rect2.bottom
+    && rectCenter.x > rect2.left
+    && rectCenter.x < rect2.right){
+        return true;
+    }
+    return false;
+}
+</script>
+</body>
+</html>

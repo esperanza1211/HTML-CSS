@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+img {
+    vertical-align: top;
+    border: none;
+}
+.wrap {
+    width: 600px;
+    height: 400px;
+    background: #e1e1e1;
+    margin: 30px auto;
+}
+.box {
+    position: absolute;
+    left: 50%;
+    top: 80px;
+    transform: translateX(-50%);
+    width: 420px;
+    height: 320px;
+    border: 2px solid #fff;
+    overflow: hidden;
+}
+.list {
+    width: 500%;
+    height: 100%;
+}
+.list li {
+    float: left;
+    width: 420px;
+    height: 320px;
+}
+.list li img {
+    width: 420px;
+    height: 320px;
+}
+.list2 {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 0;
+}
+.diamonds {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    margin: 0 10px;
+}
+.box span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, .5);
+}
+#prev {
+    left: 0;
+}
+#next {
+    right: 0;
+}

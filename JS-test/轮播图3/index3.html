@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="css/index2.css">
+<script src="tween.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="box">
+            <ul class="list">
+                <li><img src="img/img1.jpg"/></li>
+                <li><img src="img/img2.jpg"/></li>
+                <li><img src="img/img3.jpg"/></li>
+                <li><img src="img/img4.jpg"/></li>
+                <li><img src="img/img5.jpg"/></li>
+                <li><img src="img/img1.jpg"/></li>                
+            </ul>
+            <ul class="list2">
+                <li class="diamonds"></li>
+                <li class="diamonds"></li>
+                <li class="diamonds"></li>
+                <li class="diamonds"></li>
+                <li class="diamonds"></li>
+            </ul>
+            <span id="prev"></span>
+            <span id="next"></span>
+        </div>
+    </div>
+<script>
+(function(){
+    var obox = document.querySelector('.box');
+    var olist = document.querySelector('.list');
+    var lis = document.querySelectorAll('.list li');
+    var lis2 = document.querySelectorAll('.diamonds');
+    var prev = document.querySelector('#prev');
+    var next = document.querySelector('#next');
+    var nub = 0;
+    var liW = css(lis[0],"width");
+    var autoTimer = 0;
+    css(lis2[nub],"height",30);
+	for(var i = 0; i < lis2.length; i++){
+		lis2[i].index = i;
+		lis2[i].onclick = function(){
+            for(var i = 0; i < lis2.length; i++){
+                startMove(lis2[i],{height:15},100,'easeOut');
+            }
+            nub = this.index;
+            startMove(olist,{marginLeft:-liW*nub},500,'easeOut');
+            startMove(lis2[nub],{height:30},100,'easeOut');  
+		};
+	}
+    prev.onclick = function(){
+        toprev();
+    }
+    function toprev(){
+        for(var i = 0; i < lis2.length; i++){
+            startMove(lis2[i],{height:15},100,'easeOut');
+        }
+        if(nub == 0){
+            nub = 5;
+            olist.style.marginLeft = -liW*nub+'px';
+        }
+        nub--;
+        startMove(olist,{marginLeft:-liW*nub},500,'easeOut');
+        startMove(lis2[nub%5],{height:30},100,'easeOut');        
+    }
+    next.onclick = function(){
+        toNext();
+    }
+    function toNext(){
+        for(var i = 0; i < lis2.length; i++){
+            startMove(lis2[i],{height:15},100,'easeOut');
+        }
+        if(nub == 5){
+            nub = 0;
+            olist.style.marginLeft = -liW*nub+'px';
+        }
+        nub++;
+        console.log(nub);
+        startMove(olist,{marginLeft:-liW*nub},500,'easeOut');
+        startMove(lis2[nub%5],{height:30},100,'easeOut'); 
+    }
+    autoTimer = setInterval(toNext,2000);
+	obox.onmouseover = function(){
+		clearInterval(autoTimer);
+	};
+	obox.onmouseout = function(){
+		autoTimer = setInterval(toNext,2000);
+	};
+})()
+</script>
+</body>
+</html>

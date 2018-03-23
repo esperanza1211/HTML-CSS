@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+p,
+h3,
+h4 {
+    margin: 0;
+    color :#a5abbc;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wrap {
+    width: 700px;
+    height: 460px;
+    margin: 30px auto;
+    position: relative;
+}
+/*---------------------------------------*/
+.recruitList {
+	/*display: none;*/
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 700px;
+    height: 460px;
+    background: #20242d;
+    border-radius: 10px;
+}
+.nav {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    width: 95px;
+    height: 440px;
+    padding-top: 20px;
+}
+.nav p {
+    text-align: center;
+    margin: 20px 0;
+    cursor: pointer;
+}
+.con {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 605px;
+    height: 460px;
+}
+.list {
+    width: 578px;
+    position: absolute;
+    right: 27px;
+    top: 80px;
+}
+.list li {
+    position: relative;
+    height: 80px;
+    font: 14px/16px "微软雅黑";
+    border-bottom: 2px dotted #282c35;
+    cursor: pointer;
+}
+.list li .order {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    height: 55px;
+    width: 66px;
+    font: 30px/55px Arial;
+    text-indent: 30px;
+    border-left: 3px solid #2d323e;
+}
+.list li .text {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    width: 508px;
+    height: 40px;
+    font: 14px/16px "微软雅黑";
+    border-left: 2px solid #252932;
+}
+.list .text p {
+    width: 400px;
+    text-indent: 6px;
+}
+.list .text time {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #5d6372;
+}
+.list .text span {
+    position: absolute;
+    right: 0;
+    top: 16px;
+    color: #d2d5e8;
+}
+.foot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 606px;
+    text-align: center;
+    font: 16px/44px Arial;
+}
+.foot a {
+    color: #a5abbc;
+    margin: 0 5px;
+}
+/* --------------------------------------------- */
+.recruitInfor {
+	display: none;
+    position: absolute;
+    left: 25px;
+    top: 0;
+    width: 650px;
+    height: 460px;
+    background: #20242d;
+    border-radius: 10px;
+}
+.header {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    width: 600px;
+    height: 160px;
+    border-bottom: 2px solid #282c35;
+}
+.ret {
+    position: absolute;
+    right: 165px;
+    top: 25px;
+    font: 14px/30px "微软雅黑";
+    color: #9d1a2a;
+}
+.btn {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+    width: 110px;
+    font: 14px/26px "微软雅黑";
+    border: 2px solid #9d1a2a;
+    background: transparent;
+    border-radius: 30px;
+    color: #9d1a2a;
+    vertical-align: top;
+}
+.header h3 {
+    position: absolute;
+    left: 0;
+    top: 85px;
+    font: 24px/38px "微软雅黑";
+    color: #bdc2d7;
+}
+.header p {
+    position: absolute;
+    left: 0;
+    top: 120px;
+    font: 14px/28px "微软雅黑";
+    color: #bdc2d7;
+}
+.header time {
+    position: absolute;
+    right: 20px;
+    top: 120px;
+    font: 14px/28px "微软雅黑";
+    color: #5d6372;
+}
+.con2 {
+    position: absolute;
+    left: 25px;
+    top: 160px;
+    width: 600px;
+    height: 296px;
+}
+.con2 h4 {
+    font: 16px/26px "微软雅黑";
+    color: #bdc2d7;
+    margin-top: 10px;
+}
+.con2  p {
+    font: 14px/26px "微软雅黑";
+    color: #555c6a;
+}
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="recruitList">
+            <nav class="nav">
+                <p class="social"><span>社会招聘</sapn>society</p>
+                <p class="campus"><span>校园招聘</span>campus</p>
+            </nav>
+            <div class="con">
+                <ul class="list">
+                    <li>
+                        <p class="order">01</p>
+                        <div class="text">
+                            <p>职位需求：前端工程师11【社会招聘】 需求人数：2名</p>
+                            <p>岗位要求: 1.计算机或相关专业本科以上学历；2.从事软件测试</p>
+                            <time>2013-7-20</time>
+                            <span>查看详情&gt;&gt;</span>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="order">01</p>
+                        <div class="text">
+                            <p>职位需求：前端工程师11【社会招聘】 需求人数：2名</p>
+                            <p>岗位要求: 1.计算机或相关专业本科以上学历；2.从事软件测试</p>
+                            <time>2013-7-20</time>
+                            <span>查看详情&gt;&gt;</span>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="order">01</p>
+                        <div class="text">
+                            <p>职位需求：前端工程师11【社会招聘】 需求人数：2名</p>
+                            <p>岗位要求: 1.计算机或相关专业本科以上学历；2.从事软件测试</p>
+                            <time>2013-7-20</time>
+                            <span>查看详情&gt;&gt;</span>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="order">01</p>
+                        <div class="text">
+                            <p>职位需求：前端工程师11【社会招聘】 需求人数：2名</p>
+                            <p>岗位要求: 1.计算机或相关专业本科以上学历；2.从事软件测试</p>
+                            <time>2013-7-20</time>
+                            <span>查看详情&gt;&gt;</span>
+                        </div>
+                    </li>
+                </ul>
+                <p class="foot">
+                    <a href="javascrip:;">&lt;</a>
+                    <a href="javascrip:;">1</a>
+                    <a href="javascrip:;">2</a>
+                    <a href="javascrip:;">&gt;</a>
+                </p>
+            </div>
+        </div>
+        <div class="recruitInfor">
+            <div class="header">
+                <a href="javascript:;" class="ret">&lt;返回招聘列表</a>
+                <input type="button" value="投个简历" class="btn">
+                <h3>前端工程师【社会招聘】</h3>
+                <p>面议/上海/3年以上/本科及以上/3名</p>
+                <time>2013-7-14</time>
+            </div>
+            <div class="con2">
+                <div class="jobRequire">
+                    <h4>岗位要求:</h4>
+                    <p>1.计算机或相关专业本科以上学历;</p>
+                    <p>2.从事软件测试工作3年及以上;</p>
+                    <p>3.具备良好的沟通能力和快速学习能力;</p>
+                    <p>4.精通测试策略和方法、测试用例设计;</p>
+                    <p>5.熟悉DB2、AIX等平台的基本操作;</p>
+                    <p>6.具备2年以上金融IT行业经验,特别是有金融行业相关业务的测试或开发工作经验者优先。</p>
+                </div>
+                <div class="respon">
+                    <h4>工作职责:</h4>
+                    <p>从事计算机软件的测试工作。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

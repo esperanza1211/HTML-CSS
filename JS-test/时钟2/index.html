@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.wrap {
+    width: 600px;
+    height: 200px;
+    font-size: 0;
+}
+span {
+    display: inline-block;
+    margin: 0 5px;
+}
+img{
+    width: 60px;
+}
+</style>
+<title>Document</title>
+</head>
+<body>
+<div class="wrap">
+    <span><img src="img/0.JPG" /></span>
+    <span><img src="img/0.JPG" /></span>
+    <span><img src="img/colon.JPG" class="colon"></span>
+    <span><img src="img/0.JPG" /></span>
+    <span><img src="img/0.JPG" /></span>
+    <span><img src="img/colon.JPG" class="colon"></span>
+    <span><img src="img/0.JPG" /></span>
+    <span><img src="img/0.JPG" /></span>
+</div>
+<script>
+(function(){
+    // var oP = document.querySelector('#time');
+    var oImgs = document.getElementsByTagName('img');
+    var colons = document.querySelectorAll('.colon'); 
+    setInterval( fnTime, 1000 );
+    fnTime ();
+    setInterval(flick, 500);
+    flick();
+    function fnTime (){
+        var otimes = new Date();
+        var iHours = otimes.getHours();
+        var iMin = otimes.getMinutes();
+        var iSec = otimes.getSeconds();
+        var str = toTwo(iHours)+':'+toTwo(iMin)+':'+toTwo(iSec);
+        for(var i=0; i<str.length; i++){
+            if(i!= 2&&i!=5){
+            oImgs[i].src = 'img/' + str.charAt(i) + '.JPG';
+            }
+        }
+    }
+    function toTwo (n){
+        return n < 10 ?  '0' + n : '' + n;
+    }
+    var b = 0;
+    function flick(){
+        if(!b){
+            flickxh('img/img.JPG',1);            
+        } else {
+            flickxh('img/colon.JPG',0);
+        }
+    }
+    function flickxh(src,c){
+        for(var i = 0; i < colons.length; i++){
+                colons[i].src = src;
+                b = c;
+            }
+    }
+})()
+</script>
+</body>
+</html>

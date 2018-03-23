@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+p {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#message {
+    width: 400px;
+    background: #ccc;
+    padding: 10px;
+}
+.text {
+    width: 300px;
+    height: 100px;
+}
+.list li {
+    width: 300px;
+    font: 16px/2 "微软雅黑";
+    background: #f6f6f6;
+    margin: 3px;
+}
+.list li p {
+    width: 300px;
+    font: 16px/2 "微软雅黑";
+    word-break: break-all;
+}
+</style>
+</head>
+<body>
+<div id="message">
+    <textarea class="text"></textarea>
+    <p>按下 ctrl + enter / enter  提交留言</p>
+    <ul class="list"></ul>
+</div>
+<script>
+(function(){
+    var text = document.querySelector('.text');
+    var list = document.querySelector('.list');
+    text.addEventListener('keydown',function(e){
+        console.log(e.keyCode);
+        if(text.value.length > 140 && e.keyCode != 8){
+            alert("不能超过140个字符");
+        }
+        if(e.keyCode == 13 || e.keyCode == 13 && e.ctrlKey){
+           var li = document.createElement('li');
+           var p = document.createElement('p');
+           if(text.value.trim() == ''){
+               alert("输入内容")
+           } else {
+                p.innerHTML = text.value;
+                li.appendChild(p);
+                var lis = document.querySelectorAll('li');
+                if(lis.length > 4) {
+                    list.removeChild(list.children[0]);
+                }
+                list.appendChild(li);
+           }
+           text.value = '';
+           e.preventDefault();
+       }
+    });
+})();
+</script>
+</body>
+</html>

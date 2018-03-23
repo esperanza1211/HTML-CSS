@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+p {
+    margin: 0;
+}
+img {
+    vertical-align: top;
+    border: none;
+    width: 150px;
+    height: 150px;
+}
+.wrap {
+    width: 280px;;
+    height: 250px;
+    position: relative;
+    background: pink;
+    margin: 100px auto;
+}
+.tab {
+    width: 300px;
+    height: 40px;
+}
+.tab p {
+    float: left;
+    width: 80px;
+    height: 40px;
+    font: 20px/40px "微软雅黑";
+    background: #fff;
+    margin-left: 10px;
+    text-align: center;
+}
+.tab .active {
+    background: red;
+    color: #fff;
+}
+.box {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    height: 150px;
+    display: none;
+}
+.box img {
+    position: absolute;
+    left: 0;
+    top: 0px;
+    display: none;
+}
+.text {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    width: 80px;
+}
+.text p {
+    width: 80px;
+    height: 40px;
+    background: yellow;
+    margin-top: 10px;
+    text-align: center;
+    font: 14px/40px "微软雅黑";
+}
+.text .show {
+    font: bold 16px/40px "微软雅黑";
+    background: red;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="tab">
+        <p>第一页</p>
+        <p>第二页</p>
+        <p>第三页</p>     
+    </div>
+    <div class="box">
+        <div>
+            <img src="img/img1.jpg" />
+            <img src="img/img2.jpg" />
+            <img src="img/img3.jpg" />
+        </div>
+        <div class="text">
+            <p>第一张11</p>
+            <p>第二张11</p>
+            <p>第三张11</p>
+        </div>
+    </div>
+    <div class="box">
+        <div>
+            <img src="img/img1.jpg" />
+            <img src="img/img2.jpg" />
+            <img src="img/img3.jpg" />
+        </div>
+        <div class="text">
+            <p>第一张22</p>
+            <p>第二张22</p>
+            <p>第三张22</p>
+        </div>
+    </div>
+    <div class="box">
+        <div>
+            <img src="img/img1.jpg" />
+            <img src="img/img2.jpg" />
+            <img src="img/img3.jpg" />
+        </div>
+        <div class="text">
+            <p>第一张33</p>
+            <p>第二张33</p>
+            <p>第三张33</p>
+        </div>
+    </div>
+</div>
+<script>
+(function(){
+    var wrap = document.querySelector('.wrap');
+    var oPs = document.querySelectorAll('.tab>p');
+    var oBoxs = document.querySelectorAll('.box');
+    var aaImg = [];
+    var aaPs = [];
+    for(var i=0;i<oBoxs.length;i++){
+        aaImg[i]=oBoxs[i].querySelectorAll('img');
+        aaPs[i]=oBoxs[i].querySelectorAll('p');
+    }
+    var now = 0;
+    var nub = 0;
+    var timer = 0;
+    tabDo();
+    titleDo();
+    function tabDo() {
+        toNext();
+        timer = setInterval(titleDo,1000);
+    }
+    function toNext() {
+        if(now == oPs.length) {
+            now = 0;
+        }
+        for(var i = 0; i < oPs.length; i++) {
+            oPs[i].className = "";
+            oBoxs[i].style.display = "none";
+        }
+        oPs[now].className = "active";
+        oBoxs[now].style.display = "block";
+    }
+    function titleDo() {
+        if(nub == aaPs[now].length) {
+            nub = 0;
+            now++;
+            clearInterval(timer);
+            tabDo();
+        }
+        for(var i = 0; i < aaPs[now].length; i++) {
+            aaPs[now][i].className = "";
+            aaImg[now][i].style.display = "none";
+        }
+        aaPs[now][nub].className = "show";
+        aaImg[now][nub].style.display = "block";
+        nub++;
+    }
+    wrap.onmouseover = function() {
+        clearInterval(timer);
+    }
+    wrap.onmouseout = function() {
+        timer = setInterval(titleDo,1000);
+    }
+    for(var i =0; i < oPs.length; i++) {
+        oPs[i].index = i;
+        oPs[i].onmouseover = function() {
+            now = this.index;
+            toNext();
+            for(var k = 0; k < aaPs[now].length; k++) {
+                aaPs[now][k].className = "";
+                aaImg[now][k].style.display = "none";
+            }
+            nub = 0;
+            aaPs[now][nub].className = "show";
+            aaImg[now][nub].style.display = "block";
+        }
+    }
+    for(var i = 0; i < oPs.length; i++) {
+        for(var j = 0; j < aaPs[now].length; j++) {
+            aaPs[i][j].index = j;
+            aaPs[i][j].onmouseover = function() {
+                nub = this.index;
+                titleDo();
+            }
+        }
+    }
+    
+})()
+</script>
+</body>
+</html>
