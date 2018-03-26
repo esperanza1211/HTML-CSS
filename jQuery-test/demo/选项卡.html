@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
-<script src="../jquery-3.3.1.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <style>
 .box {
     width: 200px;
@@ -16,7 +16,7 @@
 .active {
     background: red;
 }
-</style> 
+</style>
 </head>
 <body>
     <div id="div1">
@@ -33,19 +33,19 @@
     // var Con = document.getElementsByClassName('box');
 
     // for(var i = 0; i < aInput.length; i++) {
-        
+
     //     aInput[i].index = i;
     //     aInput[i].onclick = function () {
-            
+
     //         for(var i = 0; i < aInput.length; i++) {
     //             aInput[i].className = '';
-    //             Con[i].style.display = 'none';                
+    //             Con[i].style.display = 'none';
     //         }
-            
+
     //         this.className = 'active';
     //         Con[this.index].style.display = 'block';
     //     }
-         
+
     // }
     $(function () {
         $('#div1').find('input').click(function () {
