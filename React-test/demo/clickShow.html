@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<style>
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+h2 {
+    width: 100%;
+    text-align: center;
+    background: #ccc;
+    margin: 0;
+}
+li {
+    width: 100%;
+    text-align: center;
+    height: 30px;
+}
+</style>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script src="js/react.production.min.js"></script>
+    <script src="js/react-dom.production.min.js"></script>
+    <script src="js/babel.min.js"></script>
+
+    <script type="text/babel">
+        
+        const list1 = {
+            name: ['老师'],
+            person: ['123','456','789']
+        };
+
+        const list2 = {
+            name: ['学生'],
+            person: ['aaa','bbb']
+        };
+
+        class List extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state={show:true};
+                this.clickshow=this.clickshow.bind(this);
+            }
+            
+            clickshow() {
+                this.setState({show: !this.state.show})
+            }
+
+            render() {
+                return (
+                    <div>
+                    <h2 onClick={this.clickshow}>{this.props.data.name}</h2>
+                    <ul style={{ display: this.state.show ? 'block' : 'none'}}>
+                        {this.props.data.person.map(item => {
+                            return (
+                                <li>{item}</li>
+                            )
+                        })}
+                    </ul>
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <div>
+                <List data={list1} />
+                <List data={list2} />
+            </div>,
+            document.querySelector('#app')
+        )
+
+    </script>
+
+</body>
+</html>

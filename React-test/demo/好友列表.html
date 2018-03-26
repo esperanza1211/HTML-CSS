@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script src="js/react.production.min.js"></script>
+    <script src="js/react-dom.production.min.js"></script>
+    <script src="js/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class List extends React.Component {
+            toggle(e) {
+                if(typeof this.props.fn == 'function') {
+                    this.props.fn(this.props.data.id);
+                }
+                
+            }
+            render() {
+                return (
+                    <div>
+                        <h2 onClick={this.toggle.bind(this)}>{this.props.data.name}</h2>
+                        <ul style={{display: this.props.data.show ? 'block' : 'none'}}>
+                            {this.props.data.list.map(item => {
+                                return (<li>{item}</li>)
+                            })}
+                        </ul>
+                    </div>
+                );
+            }
+        }
+
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    lists:[
+                        {id: 1,
+                        name:"我的好友",
+                        list:["111", "222"],
+                        show: false
+                        },
+                        {id: 2,
+                        name:"企业好友",
+                        list:["333", "444", "555"],
+                        show: false
+                        },
+                        {id: 3,
+                        name:"黑名单",
+                        list:["666", "777"],
+                        show: false
+                        }
+                    ]
+                };
+                
+            }
+            toggle(index) {
+                
+                this.setState({lists: this.state.lists.map(item => {
+                    if(item.id == index) {
+                        item.show = !item.show;
+                    } else {
+                        item.show = false;
+                    }
+                    return item;
+                })})
+            }
+            render() {
+                return (
+                    <div>
+                        {this.state.lists.map(item => {
+                            return <List data={item} fn={this.toggle.bind(this)}/>
+                        })}
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <App />
+            ,
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>

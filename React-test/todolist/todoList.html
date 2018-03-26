@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+body,
+p,
+h1 {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+input,
+button {
+    margin: 0;
+	padding: 0;
+	outline: none;
+	border: 1px solid #000;
+	box-sizing: content-box;
+}
+body {
+    background: #f5f5f5;
+}
+#app {
+    width: 500px;
+    background: #fff;
+    margin: 100px auto;
+}
+#mHeader {
+    width: 450px;
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+    padding-left: 50px;
+    position: relative;
+}
+#mHeader h1 {
+    position: absolute;
+    top: -50px;
+    left: 200px;
+}
+#mHeader input {
+    width: 450px;
+    height: 30px;
+    padding: 10px 0 10px;
+    border: 0;
+    font: 24px/30px "微软雅黑";
+    color: #4d4d4d;
+}
+#mHeader input::-webkit-input-placeholder {
+    font-style: italic;
+    font-weight: 300;
+    color: #e6e6e6;
+}
+#mMain {
+    position: relative;
+}
+#checkAll {
+    position: absolute;
+    left: 10px;
+    top: -40px;
+    width: 30px;
+    height: 30px;
+}
+#list li {
+    position: relative;
+    font: 24px/30px "微软雅黑";
+    padding: 10px 0 10px 50px;
+    border-bottom: 1px solid #ccc;
+    color: #4d4d4d;
+}
+#list li.completed {
+    text-decoration: line-through;
+    color: #d9d9d9;
+}
+#list li .check {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+}
+#list li .destroy {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background: transparent;
+    font-size: 20px;
+    color: rgba(0, 0, 0, .3);
+}
+#list li:hover .destroy {
+    display: block;
+}
+#list li .destroy:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, .7);
+}
+.edit {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 450px;
+    height: 30px;
+    padding: 10px 0;
+    text-indent: 10px;
+    font: 24px/30px "微软雅黑";
+}
+#mFoot {
+    height: 50px;
+    padding-top: 10px;
+}
+#todo-count {
+    display: inline-block;
+}
+#filters {
+    display: inline-block;
+    margin-left: 30px;
+}
+#filters li {
+    display: inline-block;
+    padding: 2px;
+    margin: 3px;
+}
+#filters li.selected {
+    padding: 1px;
+    border: 1px solid #ccc;
+}
+#filters li:hover {
+    cursor: pointer;
+    padding: 1px;
+    border: 1px solid #ccc;
+}
+#clear-completed {
+    border: 0;
+    background: transparent;
+    font-size: 16px;
+    color: #ccc;
+    margin-left: 20px;
+}
+#clear-completed:hover {
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    
+}
+</style>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/prop-types.js"></script>
+<script src="js/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        class Header extends React.Component {
+
+            pushFn(e) {
+                if(e.keyCode == 13 && typeof this.props.onpushFn === 'function'){
+                    this.props.onpushFn(e.target.value);
+                    e.target.value = '';
+                }
+            }
+
+            render() {
+                return (
+                    <div id="mHeader">
+                        <h1>{this.props.title}</h1>
+                        <input type="text" placeholder={this.props.text} onKeyDown={this.pushFn.bind(this)}/>
+                    </div>
+                );
+            }
+        }
+
+        Header.defaultProps = {
+            title: "todos",
+            text: "What needs to be done?"
+        }
+
+        class Main extends React.Component {
+
+            checkFn(item) {
+                if( typeof this.props.oncheckFn === 'function') {
+                    this.props.oncheckFn(item)
+                }
+            }
+
+            ischeckAllFn() {
+                if( typeof this.props.onischeckAllFn === 'function') {
+                    return this.props.onischeckAllFn()
+                }
+            }
+
+            checkAllFn(e) {
+                if( typeof this.props.oncheckAllFn === 'function') {
+                    this.props.oncheckAllFn(e.target.checked)
+                }
+            }
+
+            destroy(item) {
+                if( typeof this.props.ondestroy === 'function') {
+                    this.props.ondestroy(item)
+                }
+            }
+
+            editFn(item) {
+                if( typeof this.props.oneditFn === 'function') {
+                    this.props.oneditFn(item)
+                }
+            }
+
+            editEndFn(item, value) {
+                if( typeof this.props.oneditEndFn === 'function') {
+                    this.props.oneditEndFn(item, value)
+                }
+            }
+
+            render() {
+                return (
+                    <div id="mMain">
+                        <input type="checkbox" id="checkAll" 
+                        checked={this.ischeckAllFn.call(this)} 
+                        onChange={this.checkAllFn.bind(this)}/>
+
+                        <List data={this.props.data} 
+                        ondestroy={this.destroy.bind(this)}
+                        oncheckFn={this.checkFn.bind(this)}
+                        oneditFn={this.editFn.bind(this)} 
+                        oneditEndFn={this.editEndFn.bind(this)}
+                        />
+                    </div>
+                );
+            }
+        }
+
+        class List extends React.Component {
+
+            checkFn(item) {
+                if( typeof this.props.oncheckFn === 'function') {
+                    this.props.oncheckFn(item)
+                }
+            }
+
+            destroy(item) {
+                if( typeof this.props.ondestroy === 'function') {
+                    this.props.ondestroy(item)
+                }
+            }
+
+            editFn(item) {
+                if( typeof this.props.oneditFn === 'function') {
+                    this.props.oneditFn(item)
+                }
+            }
+
+            editEndFn(item, value) {
+                if( typeof this.props.oneditEndFn === 'function') {
+                    this.props.oneditEndFn(item, value)
+                }
+            }
+
+            render() {
+                return (
+                    <ul id="list">
+                        {this.props.data.map(item => {
+                            return (<Task data={item} 
+                            key={item.title} 
+                            oneditFn={this.editFn.bind(this)}
+                            ondestroy={this.destroy.bind(this)} 
+                            oncheckFn={this.checkFn.bind(this)} 
+                            oneditEndFn={this.editEndFn.bind(this)}
+                            />)
+                        })}  
+                    </ul>
+                );
+            }
+        }
+
+        class Task extends React.Component {
+            constructor(args) {
+                super(args);
+                this.state={
+                    v:this.props.data.title
+                }
+            }
+
+            checkFn(item) {
+                if( typeof this.props.oncheckFn === 'function') {
+                    this.props.oncheckFn(item)
+                }
+            }
+
+            destroy(item) {
+                if( typeof this.props.ondestroy === 'function') {
+                    this.props.ondestroy(item)
+                }
+            }
+
+            editFn(e) {
+                if( typeof this.props.oneditFn === 'function') {
+                    this.props.oneditFn(this.props.data);
+                }
+                this.refs.text.value='';
+                setTimeout(() => {
+                    this.refs.text.value = this.props.data.title;
+                    this.refs.text.focus();
+                }, 1);
+
+            }
+
+            editEndFn(e) {
+                if( e.keyCode == 13 && typeof this.props.oneditEndFn === 'function') {
+                    let title = (e.target.value.trim() == '' ? this.props.data.title : e.target.value);
+                    this.props.oneditEndFn(this.props.data, title);
+                }
+            }
+
+            render() {
+                return (
+                    <li className={this.props.data.completed ? 'completed' : ''} 
+                    onDoubleClick={this.editFn.bind(this)}>
+                        <Infor data={this.props.data} 
+                        ondestroy={this.destroy.bind(this)} 
+                        oncheckFn={this.checkFn.bind(this)}
+                        />
+
+                        <input type="text" ref="text" className="edit" 
+                        style={{display: this.props.data.editing ? 'block' : 'none'}} 
+                        value={this.state.v} 
+                        onChange={e => {this.setState({v : e.target.value})}}
+                        onKeyDown={this.editEndFn.bind(this)}
+                        />   
+                    </li>
+                );
+            }
+        }
+ 
+        class Infor extends React.Component {
+
+            checkFn() {
+                if( typeof this.props.oncheckFn === 'function') {
+                    this.props.oncheckFn(this.props.data)
+                }
+            }
+
+            destroy(e) {
+                if( typeof this.props.ondestroy === 'function') {
+                    this.props.ondestroy(this.props.data)
+                }
+            }
+
+            render() {
+                return (
+                    <div>
+                        <input type="checkbox" className="check" 
+                        checked={this.props.data.completed}
+                        onChange={this.checkFn.bind(this)}/>
+
+                        <span>{this.props.data.title}</span>
+                        <button className="destroy" onClick={this.destroy.bind(this)}>x</button>  
+                    </div>
+                );
+            }
+        }
+
+        class Foot extends React.Component {
+
+            clearFn() {
+                if(typeof this.props.onclearFn === 'function') {
+                    this.props.onclearFn();
+                }
+            }
+
+            showFn(e) {
+                if(typeof this.props.onshowFn === 'function') {
+                    this.props.onshowFn(e.target.innerHTML);
+                }
+            }
+
+            render() {
+                return (
+                    <div id="mFoot">
+                        <div id="todo-count">
+                            <strong>{this.props.data.length}</strong>
+                            <span> </span>    
+                            <span>items</span>    
+                            <span> left</span>    
+                        </div>
+                        <ul id="filters">
+                            {this.props.filters.map(item => {
+                                return (
+                                    <li key={item}
+                                    className={this.props.showtype == item ? 'selected' : ''}
+                                    onClick={this.showFn.bind(this)}
+                                    >{item}</li> 
+                                )
+                            })}  
+                        </ul>
+                        <button id="clear-completed" onClick={this.clearFn.bind(this)}>Clear completed</button>
+                    </div>
+                );
+            }
+        }
+
+        Foot.defaultProps = {
+            filters:['All', 'Uncompleted', 'Completed']
+        }
+
+        class App extends React.Component {
+            constructor(args) {
+                super(args);
+                this.state = {
+                    showType: 'All',
+                    tasks : [
+                        {title: 'angular', completed: false, editing: false},
+                        {title: 'vue', completed: true, editing: false},
+                        {title: 'react', completed: false, editing: false}
+                    ]
+                }
+            }
+
+            pushFn(name) {
+                let tasks = [...this.state.tasks,{
+                    title: name,
+                    completed: false, 
+                    editing: false
+                }];
+                this.setState({
+                    tasks
+                })
+            }
+
+            checkAllFn(bool) {
+                this.setState({
+                    tasks: this.state.tasks.map(item => {
+                        item.completed = bool;
+                        return item;
+                    })
+                })
+            }
+
+            checkFn(task) {
+                this.setState({
+                    tasks: this.state.tasks.map(item => {
+                        if(item == task) {
+                            item.completed = !item.completed;
+                        }
+                        return item;
+                    })
+                })
+            }
+
+            ischeckAllFn() {
+                return  this.state.tasks.length != 0 ? !this.state.tasks.find(item => !item.completed) : false;
+            }
+
+            destroy(task) {
+                this.setState({
+                    tasks: this.state.tasks.filter(item => {
+                        return item != task;
+                    })
+                })
+            }
+
+            editFn(task) {
+                this.setState({
+                    tasks: this.state.tasks.map(item => {
+                        if(item == task) {
+                            item.editing = true;
+                        } else {
+                            item.editing = false;
+                        }
+                        return item;
+                    })
+                })
+            }
+
+            editEndFn(task, value) {
+                this.setState({
+                    tasks: this.state.tasks.map(item => {
+                        if(item == task) {
+                            item.editing = false;
+                            item.title = value;
+                        }
+                        return item;
+                    })
+                })
+            }
+
+            showFn(item) {
+                this.setState({
+                    showType: item
+                })
+            }
+
+            clearFn() {
+                this.setState({
+                    tasks: this.state.tasks.filter(item => {
+                        return !item.completed;
+                    })
+                })
+            }
+
+            showData() {
+                switch (this.state.showType) {
+                    case 'Uncompleted':
+                        return this.state.tasks.filter(item => !item.completed);
+                    case 'Completed':
+                        return this.state.tasks.filter(item => item.completed);
+                    default: 
+                        return this.state.tasks;
+                }
+            }
+
+            render() {
+                return (
+                    <div>
+                        <Header　onpushFn={this.pushFn.bind(this)}/>
+
+                        <Main 
+                        data={this.showData.call(this)} 
+                        onischeckAllFn={this.ischeckAllFn.bind(this)}
+                        oncheckAllFn={this.checkAllFn.bind(this)}
+                        ondestroy={this.destroy.bind(this)}
+                        oneditFn={this.editFn.bind(this)}
+                        oneditEndFn={this.editEndFn.bind(this)}
+                        oncheckFn={this.checkFn.bind(this)}/>
+
+                        <Foot 
+                        data={this.state.tasks} 
+                        showtype={this.state.showType}
+                        onshowFn={this.showFn.bind(this)}
+                        onclearFn={this.clearFn.bind(this)}
+                        />    
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <App/>
+            ,
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>

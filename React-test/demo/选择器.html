@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+input {
+    margin: 0;
+	padding: 0;
+	outline: none;
+	border: 1px solid #000;
+}
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.g_select {
+    display: inline-block;
+    width: 240px;
+    position: relative;
+}
+.g-select_tags {
+    max-width: 208px;
+    position: absolute;
+    line-height: normal;
+    white-space: normal;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.g-tag {
+    height: 24px;
+    line-height: 24px;
+    box-sizing: border-box;
+    margin: 3px 0 3px 6px;
+    background-color: rgba(32,160,255,.1);
+    border-color: rgba(32,160,255,.2);
+    color: #20a0ff;
+    padding: 0 5px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+.g-tag_close {
+    border-radius: 50%;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 12px;
+    transform: scale(.75,.75);
+    height: 18px;
+    width: 18px;
+    line-height: 18px;
+    vertical-align: middle;
+    top: -1px;
+    right: -2px;
+    margin-top: -2px;
+}
+.g-tag_close:before {
+    content: "\E60C"
+}
+.g_input {
+    width: 100%;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #bfcbd9;
+    box-sizing: border-box;
+    color: #1f2d3d;
+    font-size: inherit;
+    height: 36px;
+    line-height: 1;
+    outline: 0;
+    padding: 3px 10px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+}
+
+.g_close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    display: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background: #ccc;
+    text-align: center;
+    cursor: pointer;
+    font: 20px/25px Arial;
+    color: #fff;
+}
+
+.g_select:hover .g_close {
+    display: inline-block;
+}
+
+.g-select-dropdown {
+    position: absolute;
+    top: 36px; 
+    left: 0; 
+    min-width: 240px;
+    z-index: 1001;
+    border: 1px solid #d1dbe5;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 0 6px rgba(0,0,0,.04);
+    box-sizing: border-box;
+    margin: 5px 0;
+}
+.g-select-dropdown_list {
+    position: relative;
+}
+.g-select-dropdown_item {
+    font-size: 14px;
+    padding: 8px 10px;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #48576a;
+    height: 36px;
+    line-height: 1.5;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.g-select-dropdown_item:hover {
+    background-color: #e4e8f1;
+}
+.selected {
+    color: #fff;
+    background-color: #20a0ff !important;
+}
+</style>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/prop-types.js"></script>
+<script src="js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        class G_select_tags extends React.Component {
+            render() {
+                return (
+                    <div className="g-select_tags">
+
+                    </div>
+                )
+            }
+        }
+
+        class G_tag extends React.Component {
+            render() {
+                return (
+                    <span className="g-tag">
+                        <span>{this.props.data.value}</span>
+                        <i className="g-tag_close"></i>
+                    </span>
+                )
+            }
+        }
+
+        class G_input extends React.Component {
+
+            Blur() {
+                if(typeof this.props.BlurFn == "function") {
+                    this.props.BlurFn();
+                }
+            }
+
+            clickShow() {
+                if(typeof this.props.clickShowFn == "function") {
+                    this.props.clickShowFn();
+                }
+            }
+
+            render() {
+                return (
+                    <div>
+                        <input type="text" 
+                        className="g_input" 
+                        placeholder="请选择"
+                        value={this.props.value}
+                        readOnly={true}
+                        autoComplete={'off'}
+                        onBlur={this.Blur.bind(this)}
+                        onClick={this.clickShow.bind(this)}
+                        />
+                        <i className="g_close" onClick={this.closeFn.bind(this)}
+                        >x</i>
+                    </div>
+                )
+            }
+        }
+
+        class G_select_dropdown extends React.Component {
+
+            SelectFn(item) {
+                if(typeof this.props.onSelectFn == 'function') {
+                    this.props.onSelectFn(item)
+                }
+            }
+
+            render() {
+                return (
+                    <div className="g-select-dropdown" 
+                    style={{display: this.props.isShow ? 'block' : 'none'}}
+                    >
+                        <ul className="g-select-dropdown_list">
+                            {this.props.data.map(item => {
+                                return (<G_select_item data={item} key={item.title} 
+                                onSelectFn={this.SelectFn.bind(this)}/>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                )
+            }
+        }
+
+        class G_select_item extends React.Component {
+
+            SelectFn(item ,e) {
+                if(typeof this.props.onSelectFn == 'function') {
+                    this.props.onSelectFn(this.props.data)
+                }
+            }
+
+            render() {
+                return (
+                    <li className={"g-select-dropdown_item" + (this.props.data.selected ? ' selected' : '')} 
+                    onClick={this.SelectFn.bind(this)} 
+                    >{this.props.data.title}</li>
+                )
+            }
+        }
+
+        class G_Select extends React.Component {
+
+            constructor(props) {
+                super(props);
+                this.state　= {
+                    data : this.props.data,
+                    multiple: this.props.multiple,
+                    disabled: this.props.disabled,
+                    clearable: this.props.clearable,
+                    value: '',
+                    isShow: false
+                }
+            }
+
+            Blur() {
+                setTimeout( ()=> {
+                    this.setState({
+                        isShow: false
+                    })
+                }, 200)
+            }
+
+            clickShow() {
+                this.setState({
+                    isShow: !this.state.isShow
+                })
+            }
+
+            SelectFn(item) {
+                this.setState({
+                    value: item.title,
+                    data: this.state.data.map(info => {
+                        if(item == info) {
+                            info.selected = true;
+                        } else {
+                            info.selected = false;
+                        }
+                        return info;
+                    })
+                })
+            }
+
+            render() {
+                return (
+                    <div className="g_select">
+                        {this.state.multiple ? <G_select_tags /> : ''}
+
+                        <G_input value={this.state.value} 
+                        BlurFn={this.Blur.bind(this)} 
+                        clickShowFn={this.clickShow.bind(this)}/>
+
+                        <G_select_dropdown data={this.state.data}　
+                        isShow={this.state.isShow}
+                        onSelectFn={this.SelectFn.bind(this)}/>
+                    </div>
+                )
+            }
+        }
+
+        G_Select.defaultProps = {
+            multiple: true,
+            disabled: false,
+            clearable: false,
+            placeholder: '请选择',
+        }
+
+        G_Select.propTypes = {
+            multiple: PropTypes.bool,
+            disabled: PropTypes.bool,
+            clearable: PropTypes.bool,
+            placeholder: PropTypes.string,
+            filterMethod: PropTypes.func,
+            value: PropTypes.string
+        }
+
+        let data = [
+            {title: '黄金糕', disable: false, selected: false},
+            {title: '双皮奶', disable: false, selected: false},
+            {title: '蚵仔煎', disable: false, selected: false},
+            {title: '龙须面', disable: false, selected: false},
+            {title: '北京烤鸭', disable: false, selected: false}
+        ]
+
+        ReactDOM.render(
+            <G_Select data={data}/>
+            ,
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>

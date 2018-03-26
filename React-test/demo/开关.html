@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+label {
+    padding: 0;
+    vertical-align: middle;
+}
+.g_switch {
+    position: relative;
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    cursor: pointer;
+}
+.switch_mask {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 22px;
+    cursor: not-allowed;
+    z-index: 9;
+}
+input {
+    display: none;
+}
+.switch_core {
+    position: relative;
+    display: inline-block;
+    height: 22px;
+    border-radius: 12px;
+    background: rgb(191, 203, 217);
+}
+.switch_button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    background: #fff;
+    transition: transform 0.3s;
+}
+.switch_label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
+.switch_label span {
+    position: absolute;
+    top: 0px;
+    display: inline-block;
+    width: 21px;
+    height: 14px;
+    font-size: 14px;
+    color: #fff;
+}
+.switch_label_left span {
+    right: 10px;
+}
+.switch_label_right span {
+    left: 10px;
+}
+.is_disabled .switch_mask {
+    display: block;
+}
+.is_disabled .switch_core {
+    background: rgb(238, 241, 246);
+}
+.is_disabled .switch_label span {
+    color: rgb(187, 187, 187);
+}
+</style>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/prop-types.js"></script>
+<script src="js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        class Switch extends React.Component {
+
+            constructor(props) {
+                super(props);
+                this.state = {
+                    value: this.props.value,
+                    disabled : this.props.disabled,
+                    width: this.props.width,
+                    onText : this.props.onText,
+                    offText : this.props.offText,
+                    onColor : this.props.onColor,
+                    offColor : this.props.offColor
+                }
+            }   
+
+            toggle(e) {
+                this.setState({
+                    value: e.target.checked,
+                })
+            }
+
+            render() {
+                return (
+                    <label className={"g_switch" + (this.state.disabled ? " is_disabled" : "") } 
+                    style={{width: this.state.width + 'px'}}>
+                        <div className="switch_mask" 
+                        style={{width: this.state.width + 'px'}}></div>
+                       <input type="checkbox" 
+                        checked={this.state.value} 
+                        disabled={this.state.disabled ? true : false}
+                        onChange={this.toggle.bind(this)}/>
+                        <span className="switch_core" 
+                        style={{width: this.state.width + 'px', background: !this.state.value || this.state.disabled ? this.state.offColor : this.state.onColor}} 
+                        >
+                            <span className="switch_button" 
+                            style={{transform: !this.state.value ? 'translate(2px, 3px)' : (this.state.width == 58 ? 'translate(38px, 3px)' : 'translate(26px, 3px)') }}></span>    
+                        </span>    
+                        <div className="switch_label switch_label_left" 
+                        style={{width: this.state.width + 'px', 
+                        display: this.state.width == 58 ? (!this.state.value ? 'block':'none') : 'none'}}
+                        >
+                            <span>{this.state.offText}</span>    
+                        </div>
+                        <div className="switch_label switch_label_right" 
+                        style={{width: this.state.width + 'px', 
+                        display: this.state.width == 58 ? (this.state.value ? 'block':'none') : 'none'}}
+                        >
+                            <span>{this.state.onText}</span>    
+                        </div>
+                    </label>
+                );
+            }
+        }
+
+        Switch.defaultProps = {
+            value: false,
+            disabled : false,
+            width: 58,
+            onText : 'ON',
+            offText : 'OFF',
+            onColor : '#20A0FF',
+            offColor : '#C0CCDA'
+        }
+
+        Switch.propTypes = {
+            value: PropTypes.bool,
+            disabled : PropTypes.bool,
+            width: PropTypes.oneOf([46, 58]),
+            onText : PropTypes.string,
+            offText : PropTypes.string,
+            onColor : PropTypes.string,
+            offColor : PropTypes.string
+        }
+
+        ReactDOM.render(
+            <Switch value={false}/>
+            ,
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>

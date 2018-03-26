@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+input {
+    margin: 0;
+	padding: 0;
+	outline: none;
+	border: 1px solid #000;
+	box-sizing: content-box;
+}
+.g-InputNumber {
+    display: inline-block;
+    position: relative;
+    width: 180px;
+    line-height: normal;
+    padding: 0;
+    margin: 0;
+}
+.InputNumber-minus,
+.InputNumber-add {
+    position: absolute;
+    top: 1px;
+    display: inline-block;
+    width: 36px;
+    height: 34px;
+    border-left: 1px solid rgb(191, 203, 217);
+    line-height: 34px;
+    text-align: center;
+    z-index: 1;
+    color: rgb(151, 168, 190);
+    font-weight: 400;
+    font-size: 30px;
+    cursor: pointer;
+}
+.InputNumber-minus {
+    right: 37px;
+}
+.InputNumber-add {
+    right: 0;
+}
+.InputNumber-input {
+    width: 180px;
+    height: 36px;
+    position: relative;
+    font-size: 14px;
+}
+.input_inner {
+    display: inline-block;
+    width: 100%;
+    padding: 3px 82px 3px 10px;
+    background-color: #fff;
+    box-sizing: border-box;
+    color: rgb(31, 45, 61);
+    height: 36px;
+    line-height: 1;
+    border-color: rgb(191, 203, 217);
+    border-radius: 4px;
+    font: 400 13.3333px Arial;
+}
+.is_disabled {
+    color: #d1dbe5 !important;
+    cursor: not-allowed !important;
+}
+</style>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/prop-types.js"></script>
+<script src="js/babel.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+        class InputNumber extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    defaultValue : this.props.defaultValue,
+                    value : this.props.value,
+                    min : this.props.min,
+                    max : this.props.max,
+                    step : this.props.step,
+                    disabled : this.props.disabled,
+                    controls : this.props.controls,
+                }
+            }
+
+            minus(e) {
+                e.preventDefault();
+                this.setState({
+                    value: (this.state.value -= this.state.step) <= this.state.min ? this.state.min : this.state.value
+                })
+            }
+
+            add(e) {
+                this.setState({
+                    value: (this.state.value += this.state.step) >= this.state.max ? this.state.max : this.state.value
+                })
+            }
+
+            render() {
+                let startValue = this.state.value ? this.state.value : this.state.defaultValue;
+                return (
+                    <div className={"g-InputNumber" + (this.state.disabled ? ' is_disabled' : '')}>
+                        <span className={"InputNumber-minus" + (this.state.value == this.state.min || this.state.disabled ? ' is_disabled' : '')} 
+                        onClick={this.minus.bind(this)}
+                        >-</span>
+                        <span className={"InputNumber-add" + (this.state.value == this.state.max || this.state.disabled ? ' is_disabled' : '')} 
+                        onClick={this.add.bind(this)}                      
+                        >+</span>
+                        <div className="InputNumber-input">
+                            <input type="text" 
+                            className={"input_inner" + (this.state.disabled ? ' is_disabled' : '')}
+                            value={startValue} 
+                            disabled={this.state.disabled ? true : false}
+                            onChange={e => {this.setState({value: e.target.value})}} />    
+                        </div>
+                    </div>
+                );
+            }
+        }
+
+        InputNumber.defaultProps = {
+            defaultValue : 0,
+            value : 0,
+            min : 0,
+            max : Infinity,
+            step : 1,
+            disabled : false,
+            controls : true
+        }
+
+        InputNumber.propTypes = {
+            defaultValue : PropTypes.number,
+            value : PropTypes.number,
+            min : PropTypes.number,
+            max : PropTypes.number,
+            step : PropTypes.number,
+            disabled : PropTypes.bool,
+            controls : PropTypes.bool
+        }
+
+        ReactDOM.render(
+            <InputNumber />
+            ,
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>

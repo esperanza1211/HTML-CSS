@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    span {
+        display: inline-block;
+        font: 20px/30px Arial;
+        margin: 0 5px;
+        color: #ccc;
+        cursor: pointer;
+    }
+    span.yellow {
+        color: yellow;
+    }
+    span.red {
+        color: red;
+    }
+    span.blue {
+        color: blue;
+    }
+    strong {
+        display: inline-block;
+    }
+    </style>
+</head>
+<body>
+
+    <div id="app"></div>
+
+    <script src="js/react.production.min.js"></script>
+    <script src="js/react-dom.production.min.js"></script>
+    <script src="js/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class Xing extends React.Component {
+
+            toggle(index) {
+                if(typeof this.props.fn === 'function') {
+                    this.props.fn(index);
+                }
+            }
+            mousemove(index) {
+                if(typeof this.props.move === 'function') {
+                    this.props.move(index);
+                }
+            }
+            mouseout(index) {
+                if(typeof this.props.out === 'function') {
+                    this.props.out(index);
+                }
+            }
+            render() {
+                let items = new Array(this.props.data.num).fill('').map((item, index) => {
+                    return `${index}`.repeat(5);
+                });
+                let show = function(index, num) {
+                    
+                    if(num > index) {
+                        return '';
+                    }
+                    if(index >= 0 && index < 2) {
+                        return 'yellow';
+                    } else if (index > 1 && index < 3) {
+                        return 'red';
+                    } else if (index > 2 && index < 5) {
+                        return 'blue';
+                    } else {
+                        return '';
+                    }
+                };
+                
+                return (
+                    items.map((item, index) => {
+                        return (<span 
+                            className={show( this.props.data.index, index)} 
+                            onClick={this.toggle.bind(this, index)} 
+                            onMouseMove={this.mousemove.bind(this, index)} 
+                            onMouseOut={this.mouseout.bind(this, this.props.data.clickIndex)}
+                        >★</span>);
+                    })
+                )
+            }
+        }
+
+        class Text extends React.Component {
+            render() {
+                return (
+                    <strong>{this.props.data}</strong>
+                )
+            }
+        }
+
+        class App extends React.Component {
+            constructor(args) {
+                super(args);
+                this.state={
+                    num:5,
+                    con:['极差','一般','不错','推荐','力推'],
+                    index:-1,
+                    clickIndex:-1
+                };
+            }
+            toggle(index) {
+                this.setState({clickIndex : index, index : index});
+            }
+            mousemove(index) {
+                this.setState({index: index});
+            }
+            mouseout(index) {
+                this.setState({index: index});
+            }
+            render() {
+                return (
+                    <div>
+                        <Xing data={this.state} 
+                        fn={this.toggle.bind(this)} 
+                        move={this.mousemove.bind(this)} 
+                        out={this.mouseout.bind(this)}/>
+
+                        <Text data={this.state.con.find((item,index) => {
+                            return index == this.state.index;
+                        })}/>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <App />
+            ,
+            document.querySelector('#app')
+        )
+    </script>
+</body>
+</html>

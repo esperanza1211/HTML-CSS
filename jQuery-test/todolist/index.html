@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+input {
+    margin: 0;
+	padding: 0;
+	outline: none;
+	border: 1px solid #e7e7e7;
+}
+p {
+    margin: 0;
+}
+body {
+    background: #f7f7ef;
+}
+#wrap {
+    width: 440px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px 30px;
+}
+.text {
+    width: 440px;
+    height: 50px;
+    padding: 10px;
+    font: 20px/30px "微软雅黑";
+    box-sizing: border-box;
+}
+#main {
+    display: none;
+}
+.box1 {
+    width: 440px;
+    height: 30px;
+    font: 16px/30px "微软雅黑";
+}
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.list li {
+    position: relative;
+    height: 50px;
+    font: 20px/50px "微软雅黑";
+    border-bottom: 1px solid #e7e7e7;
+}
+.list div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 50px;
+    width: 440px;
+}
+.list div span.complete {
+    text-decoration: line-through;
+    color: #ccc;
+}
+.list div strong {
+    display: none;
+    font: 20px/30px "微软雅黑";
+    color: red;
+    float: right;
+    background: #ccc;
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 50%;
+}
+.list div strong:hover {
+    cursor: pointer;
+    background: pink;
+}
+.list .txt {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 440px;
+    height: 50px;
+    padding: 10px;
+    font: 20px/30px "微软雅黑";
+    box-sizing: border-box;
+}
+.foot {
+    overflow: hidden;
+    height: 30px;
+    margin-top: 10px;
+}
+.foot p {
+    font: 14px/28px "微软雅黑";
+    color: #999999;
+}
+.foot p:nth-of-type(1) {
+    float: left;
+}
+.foot p:nth-of-type(2) {
+    float: right;
+    border: 1px solid #e7e7e7;
+    border-radius: 20px;
+    padding: 0 5px;
+}
+.foot p:nth-of-type(2):hover {
+    border-color: pink;
+    cursor: pointer;
+}
+</style>
+<script src="js/jquery-3.2.1.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <input type="text" class="text" placeholder="请输入文字">
+        <div id="main">
+            <!-- <div class="box1"><input type="checkbox" id="checkAll"><span>全部选中</span></div>
+            <ul class="list"> -->
+                <!-- <li>
+                    <div>
+                        <input type="checkbox" class="check">
+                        <span>123465</span>
+                        <strong>X</strong>
+                    </div>
+                    <input type="text" class="txt">
+                </li>
+                <li>
+                    <div>
+                        <input type="checkbox" class="check">
+                        <span>123465</span>
+                        <strong>X</strong>
+                    </div>
+                    <input type="text" class="txt">
+                </li>
+                <li>
+                    <div>
+                        <input type="checkbox" class="check">
+                        <span>123465</span>
+                        <strong>X</strong>
+                    </div>
+                    <input type="text" class="txt">
+                </li> -->
+            <!-- </ul> -->
+        </div>
+        <div class="foot">
+            <!-- <p class="uncompletes">未完成2项</p>
+            <p class="completes">清除已完成1项</p> -->
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>
