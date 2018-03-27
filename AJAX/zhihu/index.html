@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+body,
+h3,
+h4,
+p {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.loading {
+    position: fixed;
+    width: 100%;
+    height: 300px;
+    background: rgba(0, 0, 0, .5);
+    text-align: center;
+    font: bold 50px/300px '微软雅黑';
+
+}
+#header {
+    height: 60px;
+    border-bottom: 2px solid #ccc;
+    overflow: hidden;
+    padding-top: 10px;
+}
+.inputBox {
+    float: left;
+}
+.contentBox {
+    float: right;
+}
+input {
+    float: left;
+    box-sizing: border-box;
+    width: 150px;
+    height: 50px;
+    font: 16px/20px '微软雅黑'; 
+    border: 1px solid #ccc;
+    margin-left: 5px;
+    border-radius: 20px;
+}
+.box {
+    overflow: hidden;
+}
+#list {
+    float: left;
+    width: 500px;
+    border: 1px solid #000;
+    padding: 10px;
+    height: 500px;
+    overflow: auto;
+}
+#list li {
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+.boxRight {
+    width: 700px;
+    height: 500px;
+    float: right;
+}
+#content {
+    box-sizing: border-box;
+    width: 700px;
+    height: 500px;
+    border: 1px solid #000;
+    padding: 10px;
+    overflow: auto;
+}
+#contentInfor {
+    font: 16px/20px '微软雅黑'; 
+}
+.commentLi {
+    border-bottom: 1px solid #ccc;
+}
+</style>
+</head>
+<body>
+    <div class="loading">加载中……</div>
+    <header id="header">
+        <div class="inputBox">
+            <input type="button" id="nowInfor" value="获取最新信息">    
+            <input type="button" id="beforeInfor" value="获取过往信息">
+            <input type="button" id="listInfor" value="获取列表信息">
+        </div>
+        <div class="contentBox">
+            <input type="button" id="con" value="获取文章内容">
+            <input type="button" id="extraInfor" value="获取额外信息">
+            <input type="button" id="long_comments" value="获取文章较长评论">
+            <input type="button" id="short_comments" value="获取文章较短评论">
+        </div>
+    </header>
+    
+    <div class="box">
+        <ul id="list"></ul>
+        <div class="boxRight">
+            <div id="content"></div>
+            <p id="contentInfor"></p>
+        </div>
+        
+    </div>
+    
+    <script src="index_fetch.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body,
+h1,
+h3,
+p {
+    margin: 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+input {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+:-moz-placeholder,
+::-moz-placeholder,
+input:-ms-input-placeholder,
+input::-webkit-input-placeholder {
+    color: #000;
+    opacity: .5;
+}
+#header {
+    width: 100%;
+    height: 80px;
+    background: #f0f3f5;
+    padding-top: 30px;
+    position: relative;
+}
+#logo {
+    position: absolute;
+    left: 300px;
+    top: 20px;
+    font: 30px/50px Helvetica, Arial, sans-serif;
+    color: rgb(34, 119, 170);
+}
+#searchBox {
+    width: 500px;
+    height: 40px;
+    margin: 0 auto;
+    font-size: 0;
+}
+#text {
+    width: 300px;
+    height: 30px;
+    font: 16px/30px "微软雅黑";
+    box-sizing: border-box;
+    color: #000;
+    text-indent: 10px;
+    border-radius: 10px 0 0 10px;
+}
+#btn {
+    width: 100px;
+    height: 30px;
+    font: 16px/30px "微软雅黑";
+    border-radius: 0 10px 10px 0;
+    box-sizing: border-box;
+    background: #8c959e;
+    color: #fff;
+    cursor: pointer;
+}
+#classification {
+    width: 300px;
+    height: 30px;
+    margin: 0 auto;
+    transform: translateX(-80px);
+    font-size: 0;
+}
+#classification input,
+#classification label {
+    cursor: pointer;
+}
+#classification label {
+    font: 16px/30px Helvetica, Arial, sans-serif;
+    padding-left: 5px;
+    margin-right: 10px;
+}
+#list {
+    margin: 50px 0 0 300px;
+}
+#list li {
+    padding-bottom: 10px;
+}
+#list h3 {
+    font: bold 14px/21px "微软雅黑";
+}
+#list h3 a {
+    text-decoration: none;
+}
+#list h3 a:hover {
+    background-color: #f90;
+    color: white;
+}
+#list p {
+    font: 12px/18px Helvetica, Arial, sans-serif;
+    color: rgb(153, 153, 153);
+}
+</style>
+</head>
+<body>
+    <header id="header">
+        <h1 id="logo">豆瓣</h1>
+        <div id="searchBox">
+            <input type="text" id="text" placeholder="书籍、电影、音乐">
+            <input type="button" value="搜索" id="btn">
+        </div>
+        <div id="classification">
+            <input type="radio" id="books" name="douban" checked>
+            <label for="books">书籍</label>
+            <input type="radio" id="movie" name="douban">
+            <label for="movie">电影</label>
+            <input type="radio" id="music" name="douban">
+            <label for="music">音乐</label>
+        </div>
+    </header>
+    <ul id="list">
+        <!-- <li>
+            <h3 class="title"><a href="">123</a></h3>
+            <p class="score">评分</p>
+            <p class="information">信息</p>
+            <p class="actor">演员</p>
+        </li> -->
+        <!-- <li>
+            <h3 class="title"><a href="">123</a></h3>
+            <p class="score">评分</p>
+            <p class="information">信息</p>
+            <p class="actor">演员</p>
+        </li> -->
+    </ul>
+    <script src="index.js"></script>
+</body>
+</html>
